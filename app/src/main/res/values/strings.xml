@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">AppaTas</string>
+
+    <!-- menu bottom navigation view -->
+    <string name="menu_home">Inicio</string>
+    <string name="menu_localizado">Localizado</string>
+    <string name="menu_encontrar">Encontrar</string>
+    <string name="menu_mascota">Mi Mascota</string>
+    <string name="menu_perfil">Perfil</string>
+
+
+</resources>
