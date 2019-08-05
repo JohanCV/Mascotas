@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import jcv.com.mascotas.R;
-import jcv.com.mascotas.publicaciones.modelo.Publicacion;
+import jcv.com.mascotas.modelo.Publicacion;
 
 public class PublicacionAdaptador extends RecyclerView.Adapter<PublicacionAdaptador.ViewHolderPublicacion> {
 

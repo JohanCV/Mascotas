@@ -1,4 +1,4 @@
-package jcv.com.mascotas.publicaciones.modelo;
+package jcv.com.mascotas.modelo;
 
 import java.util.Date;
 

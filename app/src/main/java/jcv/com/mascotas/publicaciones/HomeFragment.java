@@ -9,8 +9,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,8 +19,8 @@ import java.util.List;
 
 import jcv.com.mascotas.R;
 import jcv.com.mascotas.publicaciones.adaptador.PublicacionAdaptador;
-import jcv.com.mascotas.publicaciones.modelo.Publicacion;
-import jcv.com.mascotas.publicaciones.servicios.ServicioPublicacion;
+import jcv.com.mascotas.modelo.Publicacion;
+import jcv.com.mascotas.servicios.ServicioPublicacion;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

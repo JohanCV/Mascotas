@@ -1,4 +1,4 @@
-package jcv.com.mascotas.publicaciones;
+package jcv.com.mascotas.publicaciones.adaptador;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

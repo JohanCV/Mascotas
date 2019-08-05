@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="jcv.com.mascotas">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,12 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".Encontrar.EncontrarActivity" ></activity>
-        <activity android:name=".localizados.LocalizadoActivity"></activity>
-        <activity android:name=".mascota.MascotaActivity"></activity>
-        <activity android:name=".usuario.PerfilActivity"></activity>
-
+        <activity android:name=".login.LoginActivity"></activity>
+        <activity android:name=".Encontrar.EncontrarActivity" />
+        <activity android:name=".localizados.LocalizadoActivity" />
+        <activity android:name=".mascota.MascotaActivity" />
+        <activity android:name=".usuario.PerfilActivity" />
+        <activity android:name=".usuario.PerfilEditarActivity" />
+        <activity android:name=".usuario.CrearPerfilActivity"/>
         <activity android:name=".publicaciones.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

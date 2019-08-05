@@ -8,5 +8,17 @@
     <string name="menu_mascota">Mi Mascota</string>
     <string name="menu_perfil">Perfil</string>
 
+    <!-- menu perfil del usuario -->
+    <string name="menu_perfil_edit">Editar</string>
+    <string name="menu_perfil_eliminar">Eliminar</string>
+    <string name="menu_perfil_salir">Cerrar Sesion</string>
+
+    <!-- login -->
+    <string name="bienvenido">Bienvenid@</string>
+    <string name="user">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Iniciar Sesión</string>
+
+
 
 </resources>

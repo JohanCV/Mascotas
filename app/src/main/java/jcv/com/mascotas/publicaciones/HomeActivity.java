@@ -13,6 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import jcv.com.mascotas.R;
+import jcv.com.mascotas.publicaciones.adaptador.SectionsPageAdapter;
 import jcv.com.mascotas.utils.BottomNavigationViewHelper;
 
 public class HomeActivity extends AppCompatActivity {

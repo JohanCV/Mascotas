@@ -1,8 +1,8 @@
-package jcv.com.mascotas.publicaciones.servicios;
+package jcv.com.mascotas.servicios;
 
 import java.util.List;
 
-import jcv.com.mascotas.publicaciones.modelo.Publicacion;
+import jcv.com.mascotas.modelo.Publicacion;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
