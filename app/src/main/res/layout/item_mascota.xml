@@ -6,71 +6,12 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_carview_publicacion">
 
-    <LinearLayout
-        android:id="@+id/layout_cabecera"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="@dimen/margin_carview_publicacion">
-
-        <ImageView
-            android:id="@+id/imgUsuario"
-            android:layout_width="@dimen/with_image"
-            android:layout_height="@dimen/height_image"
-            android:scaleType="centerCrop" />
-
-        <TextView
-            android:id="@+id/txtNombreUsurio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="@dimen/text_margin_publicacion"
-            android:textSize="@dimen/text_size_titulo"
-            android:text="Nombre" />
-
-        <TextView
-            android:id="@+id/txtHora"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="@dimen/text_margin_publicacion"
-            android:textSize="@dimen/text_size_publicacion"
-            android:text="hora" />
-
-        <TextView
-            android:id="@+id/txtFecha"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="@dimen/text_margin_publicacion"
-            android:textSize="@dimen/text_size_publicacion"
-            android:text="fecha" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_separador"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:orientation="horizontal">
-
-        <View
-            android:id="@+id/viewLine"
-            android:layout_width="wrap_content"
-            android:layout_height="2dp"
-            android:layout_below="@+id/layout_cabecera"
-            android:layout_weight="1"
-            android:background="@color/colorAccent" />
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layout_cuerpo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="5dp"
         android:orientation="horizontal">
 
@@ -81,7 +22,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imgMascota"
+                android:id="@+id/imgMascotaperfil"
                 android:layout_width="120dp"
                 android:layout_height="80dp"
                 android:scaleType="centerCrop"
@@ -96,7 +37,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtNombreMascota"
+                android:id="@+id/txtNombreMascotaPerfil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/text_margin_publicacion"
@@ -104,19 +45,19 @@
                 android:textSize="@dimen/text_size_publicacion" />
 
             <TextView
-                android:id="@+id/txtDonde"
+                android:id="@+id/txtRazaPerfil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/text_margin_publicacion"
-                android:text="Donde:"
+                android:text="Raza:"
                 android:textSize="@dimen/text_size_publicacion" />
 
             <TextView
-                android:id="@+id/txtPresupuesto"
+                android:id="@+id/txtObservacionesPerfil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/text_margin_publicacion"
-                android:text="Recompensa:"
+                android:text="Observaciones:"
                 android:textSize="@dimen/text_size_publicacion" />
         </LinearLayout>
 
@@ -127,7 +68,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtNombreMascotaInput"
+                android:id="@+id/txtNombreMascotaPerfilInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/text_margin_publicacion"
@@ -135,7 +76,7 @@
                 android:textSize="@dimen/text_size_publicacion" />
 
             <TextView
-                android:id="@+id/txtDondeInput"
+                android:id="@+id/txtRazaMascotaPerfilInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/text_margin_publicacion"
@@ -143,7 +84,7 @@
                 android:textSize="@dimen/text_size_publicacion" />
 
             <TextView
-                android:id="@+id/txtPresupuestoInput"
+                android:id="@+id/txtObservacionesMAscotaPerfilInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/text_margin_publicacion"

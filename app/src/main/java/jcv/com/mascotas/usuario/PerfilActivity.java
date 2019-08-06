@@ -9,11 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import jcv.com.mascotas.R;
 import jcv.com.mascotas.login.LoginActivity;
-import jcv.com.mascotas.publicaciones.HomeActivity;
 import jcv.com.mascotas.utils.BottomNavigationViewHelper;
 
 public class PerfilActivity extends AppCompatActivity {
@@ -54,6 +54,7 @@ public class PerfilActivity extends AppCompatActivity {
                         startActivity(intentEditPerfil);
                         break;
                     case R.id.menu_perfil_eliminar:
+                        Toast.makeText(mcontext, "Se elimina por id", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.menu_perfil_sali:
                         Intent intentCerrarSession = new Intent(getApplicationContext(), LoginActivity.class);

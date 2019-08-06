@@ -18,6 +18,10 @@
         <activity android:name=".usuario.PerfilActivity" />
         <activity android:name=".usuario.PerfilEditarActivity" />
         <activity android:name=".usuario.CrearPerfilActivity"/>
+        <activity android:name=".mascota.CrearPerfilMascotaActivity"/>
+        <activity android:name=".mascota.DetalleMascotaActivity"/>
+        <activity android:name=".mascota.MascotaEditarActivity"/>
+
         <activity android:name=".publicaciones.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
