@@ -64,6 +64,7 @@
                 android:id="@+id/edtxtPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textPassword"
                 android:hint="@string/password" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -104,5 +105,7 @@
         android:textColor="@color/colorBlueWhite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
