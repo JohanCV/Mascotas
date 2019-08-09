@@ -11,17 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".login.LoginActivity"></activity>
+        <activity android:name=".login.LoginActivity" />
         <activity android:name=".Encontrar.EncontrarActivity" />
         <activity android:name=".localizados.LocalizadoActivity" />
         <activity android:name=".mascota.MascotaActivity" />
         <activity android:name=".usuario.PerfilActivity" />
         <activity android:name=".usuario.PerfilEditarActivity" />
-        <activity android:name=".usuario.CrearPerfilActivity"/>
-        <activity android:name=".mascota.CrearPerfilMascotaActivity"/>
-        <activity android:name=".mascota.DetalleMascotaActivity"/>
-        <activity android:name=".mascota.MascotaEditarActivity"/>
-
+        <activity android:name=".usuario.CrearPerfilActivity" />
+        <activity android:name=".mascota.CrearPerfilMascotaActivity" />
+        <activity android:name=".mascota.DetalleMascotaActivity" />
+        <activity android:name=".mascota.MascotaEditarActivity" />
         <activity android:name=".publicaciones.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".publicaciones.CrearPublicacionActivity"></activity>
     </application>
 
 </manifest>
