@@ -1,6 +1,7 @@
 package jcv.com.mascotas.modelo;
 
 public class Mascota {
+    int id;
     String nombre;
     String raza;
     String observaciones;
