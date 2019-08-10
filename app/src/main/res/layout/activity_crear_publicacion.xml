@@ -167,6 +167,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@color/colorPrimaryDark"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
                     android:text="Publicar" />
             </LinearLayout>
         </LinearLayout>
