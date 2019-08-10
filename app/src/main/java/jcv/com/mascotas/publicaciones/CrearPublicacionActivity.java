@@ -63,13 +63,13 @@ public class CrearPublicacionActivity extends AppCompatActivity {
     }
     private void eventos(){
         Listar_mascota_usuario();
+        habilitar_recompensa();
         ib_ObtenerFecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 obtenerFecha();
             }
         });
-        habilitar_recompensa();
 
         btn_publicar.setOnClickListener(new View.OnClickListener() {
             @Override
