@@ -53,7 +53,7 @@ public class MascotaActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.rv_mis_mascotas);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        llenarListaBaseDatos();
+        //llenarListaBaseDatos();
         mascotaAdaptador = new MascotaAdaptador(getApplicationContext(),listMascotas);
 
         recyclerView.setAdapter(mascotaAdaptador);
@@ -85,9 +85,9 @@ public class MascotaActivity extends AppCompatActivity {
         });
 
     }
-    private void llenarListaBaseDatos(){
+/*    private void llenarListaBaseDatos(){
         listMascotas.add(new Mascota("firulais","doberman","cojea"));
         listMascotas.add(new Mascota("pelucas","siberiano","plateado"));
         listMascotas.add(new Mascota("mailo","pubg","bebe"));
-    }
+    }*/
 }

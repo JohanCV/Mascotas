@@ -1,5 +1,6 @@
 package jcv.com.mascotas.publicaciones;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jcv.com.mascotas.R;
+import jcv.com.mascotas.mascota.CrearPerfilMascotaActivity;
 import jcv.com.mascotas.publicaciones.adaptador.PublicacionAdaptador;
 import jcv.com.mascotas.modelo.Publicacion;
 import jcv.com.mascotas.servicios.ServicioPublicacion;
@@ -46,7 +48,6 @@ public class HomeFragment extends Fragment {
 
 
         floatingActionButton = view.findViewById(R.id.floatingActionButtonPublicar);
-
 
         coneccion();
         events();
@@ -92,11 +93,8 @@ public class HomeFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (view.getId()){
-                    case R.id.floatingActionButtonPublicar:
-                        showPopupPublicar();
-                        break;
-                }
+                Intent intentcrearpublicacion = new Intent(getContext(), CrearPublicacionActivity.class);
+                startActivity(intentcrearpublicacion);
             }
         });
     }

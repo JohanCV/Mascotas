@@ -5,22 +5,46 @@ import java.util.Date;
 public class Publicacion {
 
     //servicio atributos
-    private Float recompensa;
-    private Date fecha_perdida;
-    private Float latitud_perdida;
-    private Float longitud_perdida;
+    int idpublicacion;
+    Date fecha_publicacion;
+    Double recompensa;
+    Date fecha_perdida;
+    Double latitud_perdida;
+    Double longitud_perdida;
+    String estado;
 
 
-
-    Publicacion(){
-
+    public Publicacion(int idpublicacion, Date fecha_publicacion, Double recompensa, Date fecha_perdida, Double latitud_perdida, Double longitud_perdida, String estado) {
+        this.idpublicacion = idpublicacion;
+        this.fecha_publicacion = fecha_publicacion;
+        this.recompensa = recompensa;
+        this.fecha_perdida = fecha_perdida;
+        this.latitud_perdida = latitud_perdida;
+        this.longitud_perdida = longitud_perdida;
+        this.estado = estado;
     }
-    //Get a Set Service's
-    public Float getRecompensa() {
+
+    public int getIdpublicacion() {
+        return idpublicacion;
+    }
+
+    public void setIdpublicacion(int idpublicacion) {
+        this.idpublicacion = idpublicacion;
+    }
+
+    public Date getFecha_publicacion() {
+        return fecha_publicacion;
+    }
+
+    public void setFecha_publicacion(Date fecha_publicacion) {
+        this.fecha_publicacion = fecha_publicacion;
+    }
+
+    public Double getRecompensa() {
         return recompensa;
     }
 
-    public void setRecompensa(Float recompensa) {
+    public void setRecompensa(Double recompensa) {
         this.recompensa = recompensa;
     }
 
@@ -32,19 +56,27 @@ public class Publicacion {
         this.fecha_perdida = fecha_perdida;
     }
 
-    public Float getLatitud_perdida() {
+    public Double getLatitud_perdida() {
         return latitud_perdida;
     }
 
-    public void setLatitud_perdida(Float latitud_perdida) {
+    public void setLatitud_perdida(Double latitud_perdida) {
         this.latitud_perdida = latitud_perdida;
     }
 
-    public Float getLongitud_perdida() {
+    public Double getLongitud_perdida() {
         return longitud_perdida;
     }
 
-    public void setLongitud_perdida(Float longitud_perdida) {
+    public void setLongitud_perdida(Double longitud_perdida) {
         this.longitud_perdida = longitud_perdida;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }
