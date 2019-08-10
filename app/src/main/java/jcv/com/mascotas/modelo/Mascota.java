@@ -3,13 +3,24 @@ package jcv.com.mascotas.modelo;
 public class Mascota {
     int id;
     String nombre;
-    String raza;
+    String sexo;
     String observaciones;
+    int raza;
 
-    public Mascota(String nombre, String raza, String observaciones) {
+    public Mascota(int id, String nombre, String sexo, String observaciones, int raza) {
+        this.id = id;
         this.nombre = nombre;
-        this.raza = raza;
+        this.sexo = sexo;
         this.observaciones = observaciones;
+        this.raza = raza;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -20,12 +31,12 @@ public class Mascota {
         this.nombre = nombre;
     }
 
-    public String getRaza() {
-        return raza;
+    public String getSexo() {
+        return sexo;
     }
 
-    public void setRaza(String raza) {
-        this.raza = raza;
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
     public String getObservaciones() {
@@ -34,5 +45,13 @@ public class Mascota {
 
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
+    }
+
+    public int getRaza() {
+        return raza;
+    }
+
+    public void setRaza(int raza) {
+        this.raza = raza;
     }
 }
