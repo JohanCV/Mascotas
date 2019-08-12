@@ -12,6 +12,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import java.util.Calendar;
@@ -43,6 +45,7 @@ public class CrearPublicacionActivity extends AppCompatActivity {
     private ImageButton ib_ObtenerFecha;
     private Button btn_publicar;
     private Spinner spinner;
+    private ImageView mapa;
     private int posicion;
     List<Mascota> mascotas;
 
@@ -64,6 +67,7 @@ public class CrearPublicacionActivity extends AppCompatActivity {
         txt_Fecha_perdida = (EditText) findViewById(R.id.txt_fecha_perdida);
         btn_publicar = (Button) findViewById(R.id.btn_publicar);
         spinner =(Spinner) findViewById(R.id.spinner_escoger_mascota);
+        mapa=(ImageView) findViewById(R.id.image_mapa);
 
     }
 
@@ -93,6 +97,13 @@ public class CrearPublicacionActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 // No seleccionaron nada
+            }
+        });
+        mapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentmapa = new Intent(getApplicationContext(), MapaActivity.class);
+                startActivity(intentmapa);
             }
         });
     }

@@ -20,6 +20,7 @@
     <string name="login">Iniciar Sesión</string>
 
     <string name="formato_fecha">dd/mm/yyyy</string>
+    <string name="title_activity_mapa">Map</string>
 
 
 </resources>
