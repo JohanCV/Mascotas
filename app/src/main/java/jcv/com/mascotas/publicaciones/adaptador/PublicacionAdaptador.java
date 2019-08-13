@@ -36,11 +36,9 @@ public class PublicacionAdaptador extends RecyclerView.Adapter<PublicacionAdapta
     public void onBindViewHolder(@NonNull ViewHolderPublicacion viewHolderPublicacion, int position) {
 
         viewHolderPublicacion.fecha.setText(listPublicacion.get(position).getFecha_perdida().toString());
-
         viewHolderPublicacion.nombreMascota.setText(listPublicacion.get(position).getFecha_perdida().toString());
         viewHolderPublicacion.dondeMascota.setText(listPublicacion.get(position).getLatitud_perdida().toString());
         viewHolderPublicacion.recompensaMascota.setText(listPublicacion.get(position).getRecompensa().toString());
-
     }
 
     @Override

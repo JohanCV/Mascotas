@@ -13,6 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -46,7 +47,10 @@ public class CrearPublicacionActivity extends AppCompatActivity {
     private Button btn_publicar;
     private Spinner spinner;
     private ImageView mapa;
+    private ImageButton fotos;
     private int posicion;
+    private static final int PICK_IMAGE = 100;
+    Uri imageUri;
     List<Mascota> mascotas;
 
 
@@ -68,6 +72,7 @@ public class CrearPublicacionActivity extends AppCompatActivity {
         btn_publicar = (Button) findViewById(R.id.btn_publicar);
         spinner =(Spinner) findViewById(R.id.spinner_escoger_mascota);
         mapa=(ImageView) findViewById(R.id.image_mapa);
+        fotos=(ImageButton) findViewById(R.id.imb_agregar_imagen);
 
     }
 
@@ -106,6 +111,8 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                 startActivity(intentmapa);
             }
         });
+
+
     }
 
 
@@ -142,7 +149,6 @@ public class CrearPublicacionActivity extends AppCompatActivity {
         });
     }
 
-
     private void obtenerFecha() {
 
         DatePickerDialog recogerFecha = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -156,7 +162,6 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                 String mesFormateado = (mesActual < 10) ? CERO + String.valueOf(mesActual) : String.valueOf(mesActual);
                 //Muestro la fecha con el formato deseado
                 txt_Fecha_perdida.setText(diaFormateado + BARRA + mesFormateado + BARRA + year);
-
 
             }
             //Estos valores deben ir en ese orden, de lo contrario no mostrara la fecha actual
@@ -219,7 +224,5 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
-
 }
