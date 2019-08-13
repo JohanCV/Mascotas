@@ -26,7 +26,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CrearPerfilMascotaActivity extends AppCompatActivity {
     private ImageView regresar;
     private TextView nombreCabecera;
-    private
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
