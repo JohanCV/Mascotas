@@ -26,7 +26,8 @@
                 android:id="@+id/Nombre"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Nombre" />
+                android:hint="Nombre"
+                android:inputType="textPersonName"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -92,7 +93,8 @@
                 android:id="@+id/Email"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Email" />
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -154,15 +156,37 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:text="Provincia"
+                        android:textSize="15dp" />
+
+                    <Spinner
+                        android:id="@+id/provincia"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </Spinner>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:text="Distrito"
                         android:textSize="15dp" />
 
                     <Spinner
                         android:id="@+id/distrito"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content">
 
                     </Spinner>
+
                 </LinearLayout>
             </LinearLayout>
 
@@ -172,27 +196,29 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contraseña"
+            android:hint="Contrasea"
             tools:layout_editor_absoluteY="376dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/contraseña"
+                android:id="@+id/contrasena"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Contraseña" />
+                android:hint="Contraseña"
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Repete Contraseña"
+            android:hint="Repete Contrasena"
             tools:layout_editor_absoluteY="464dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/contraseña2"
+                android:id="@+id/contrasena2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Repete Contraseña" />
+                android:hint="Repete Contraseña"
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
@@ -218,14 +244,14 @@
             android:layout_marginEnd="140dp"
             android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+
             android:src="@drawable/cargar_imagen" />
     </LinearLayout>
 
     <Button
         android:id="@+id/btnSave"
         android:layout_width="370dp"
-        android:layout_height="40dp"
+        android:layout_height="51dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="88dp"
         android:background="@color/colorPrimaryDark"
