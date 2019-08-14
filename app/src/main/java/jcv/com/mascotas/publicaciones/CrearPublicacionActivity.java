@@ -276,14 +276,13 @@ public class CrearPublicacionActivity extends AppCompatActivity {
         File file = new File(getRealPathFromURI(selectedImage));
 
 
-        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), getRealPathFromURI(selectedImage));
+        RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("foto",file.getName(),reqFile);
+        RequestBody mascota = RequestBody.create(MediaType.parse("text/plain"),"1");
 
-        MultipartBody.Part multipartBody =MultipartBody.Part.createFormData("foto",file.getName(),requestFile);
-
-        //RequestBody descripcion = RequestBody.create(MediaType.parse("multipart/form-data"), "holiboli");
 
         //
-        Call<ResponseBody> call = Serviciopublicacion.subirFotoMascota( multipartBody,  1);
+        Call<ResponseBody> call = Serviciopublicacion.subirFotoMascota( body,  mascota);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
