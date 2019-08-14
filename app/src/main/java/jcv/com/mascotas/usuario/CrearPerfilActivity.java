@@ -779,7 +779,7 @@ public class CrearPerfilActivity extends AppCompatActivity {
 
                             SharedPreferences.Editor editor = prefs.edit();
                             // Guardar el codigo del usuario
-                            //editor.putString("id", );
+                            editor.putInt("id", u.id);
                             editor.putString("email_usuario", "modificado@email.com");
                             editor.commit();
                         }else{
