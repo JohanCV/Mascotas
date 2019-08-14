@@ -2,12 +2,16 @@ package jcv.com.mascotas.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import jcv.com.mascotas.R;
 import jcv.com.mascotas.modelo.Usuario;
@@ -25,6 +29,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginActivity extends AppCompatActivity {
 
     private TextView crearCuenta;
+    TextInputEditText usuario;
+    TextInputEditText password;
 
     private Button btnLogin;
     @Override
@@ -39,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
     private void findElemente() {
         btnLogin = findViewById(R.id.btnLogin);
         crearCuenta = findViewById(R.id.textViewCrearCuenta);
+        usuario = findViewById(R.id.edtxtUser);
+        password = findViewById(R.id.edtxtPass);
     }
 
     private void event() {
@@ -51,13 +59,23 @@ public class LoginActivity extends AppCompatActivity {
                         .build();
 
                 ServicioUsuario servicioUsuario = retrofit.create(ServicioUsuario.class);
-                Call<Usuario> usr  = servicioUsuario.Login("Son_Gohan", "Virtu@l123");
+                Call<Usuario> usr  = servicioUsuario.Login(usuario.getText().toString(), password.getText().toString());
                 usr.enqueue(new Callback<Usuario>() {
                     @Override
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                         if(response.code() == 200){
                             Usuario u = response.body();
                             Toast.makeText(getApplicationContext(), u.token, Toast.LENGTH_SHORT).show();
+                            Intent iniciarsession = new Intent(getApplicationContext(), HomeActivity.class);
+                            startActivity(iniciarsession);
+                            SharedPreferences prefs =
+                                    getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putInt("id", u.id );
+                            editor.putString("token", u.token.toString() );
+                            editor.putString("email_usuario", "modificado@email.com");
+                            editor.commit();
                         }else{
                             Toast.makeText(getApplicationContext(), "error" , Toast.LENGTH_SHORT).show();
                         }
@@ -71,8 +89,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-                //Intent iniciarsession = new Intent(getApplicationContext(), HomeActivity.class);
-                //startActivity(iniciarsession);
+
             }
         });
 

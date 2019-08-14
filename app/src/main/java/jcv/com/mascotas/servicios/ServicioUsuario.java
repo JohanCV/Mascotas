@@ -9,6 +9,7 @@ import retrofit2.http.POST;
 public interface ServicioUsuario {
     public static String ip = "http://proyectosmovil.pythonanywhere.com";
     @POST("/appatas/login/")
+    @FormUrlEncoded
     Call<Usuario> Login(@Field("username") String usuario, @Field("password") String password);
 
     @POST("/appatas/usuario/")
