@@ -10,7 +10,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ServicioPublicacion {
-    public static String ip = "172.16.5.128:8000";
+    public static String ip = "http://proyectosmovil.pythonanywhere.com";
 
     @GET("/appatas/publicacion_list/")
     Call<List<Publicacion>> listarPublicacion();

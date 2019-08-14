@@ -2,16 +2,32 @@ package jcv.com.mascotas.modelo;
 
 public class Usuario {
     public String token;
+    public int id;
     public String username;
     public String password;
 
     public Usuario() {
-    }
 
-    public Usuario(String token, String username, String password) {
+    }
+//    public Usuario(String username, String password) {
+//        this.username = username;
+//        this.password = password;
+//
+//    }
+
+    public Usuario(String token, int id, String username, String password) {
         this.token = token;
+        this.id = id;
         this.username = username;
         this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getToken() {

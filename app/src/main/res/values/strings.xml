@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">AppaTas</string>
 
+    <!-- login facebook -->
+    <string name="facebook_app_id">2386524528285474</string>
+    <string name="fb_login_protocol_scheme">fb2386524528285474</string>
+
     <!-- menu bottom navigation view -->
     <string name="menu_home">Inicio</string>
     <string name="menu_localizado">Localizado</string>
@@ -18,6 +22,8 @@
     <string name="user">Usuario</string>
     <string name="password">Contraseña</string>
     <string name="login">Iniciar Sesión</string>
+
+
 
 
 
