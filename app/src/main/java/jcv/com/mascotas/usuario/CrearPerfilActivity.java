@@ -1,6 +1,8 @@
 package jcv.com.mascotas.usuario;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -715,9 +717,49 @@ public class CrearPerfilActivity extends AppCompatActivity {
 
         btnSave.setOnClickListener(new View.OnClickListener() {
 
-
             @Override
             public void onClick(View view) {
+
+                if (Contrasena.getText().toString().trim().isEmpty()) {
+                    Contrasena.setError("Llenar Campo Faltante");
+                } else {
+                    //Here you can write the codes for checking password
+                }
+                if (RepeteContrasena.getText().toString().trim().isEmpty()) {
+                    RepeteContrasena.setError("Llenar Campo Faltante");
+                } else {
+                    if(RepeteContrasena.getText().toString().equals(Contrasena.getText().toString())){
+
+                    }else{
+                        RepeteContrasena.setError("Error en contraseña");
+                    }
+                }
+                if (nombre.getText().toString().trim().isEmpty()) {
+
+                    nombre.setError("Llenar Campo Faltante");
+                } else {
+
+                }
+                if (apellido.getText().toString().trim().isEmpty()) {
+
+                    apellido.setError("Llenar Campo Faltante");
+                } else {
+
+                }
+                if (Email.getText().toString().trim().isEmpty()) {
+
+                    Email.setError("Llenar Campo Faltante");
+                } else {
+
+                }
+                if (Telefono.getText().toString().trim().isEmpty()) {
+                    Telefono.setError("Llenar Campo Faltante");
+                } else {
+
+                }
+
+
+
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(ServicioUsuario.ip)
                         .addConverterFactory(GsonConverterFactory.create())
@@ -728,13 +770,23 @@ public class CrearPerfilActivity extends AppCompatActivity {
                 usr.enqueue(new Callback<Usuario>() {
                     @Override
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                        if(response.code() == 200){
+                        if(response.code() == 201){
                             Usuario u = response.body();
                             Toast.makeText(getApplicationContext(), u.token, Toast.LENGTH_SHORT).show();
+                            setContentView(R.layout.activity_home);
+                            SharedPreferences prefs =
+                                    getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+
+                            SharedPreferences.Editor editor = prefs.edit();
+                            // Guardar el codigo del usuario
+                            //editor.putString("id", );
+                            editor.putString("email_usuario", "modificado@email.com");
+                            editor.commit();
                         }else{
                             Toast.makeText(getApplicationContext(), response.code()+"" , Toast.LENGTH_SHORT).show();
                         }
                     }
+
 
                     @Override
                     public void onFailure(Call<Usuario> call, Throwable t) {
