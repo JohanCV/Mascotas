@@ -15,38 +15,32 @@
         android:orientation="horizontal"
         android:padding="@dimen/margin_carview_publicacion">
 
-        <ImageView
-            android:id="@+id/imgUsuario"
-            android:layout_width="@dimen/with_image"
-            android:layout_height="@dimen/height_image"
-            android:scaleType="centerCrop" />
-
         <TextView
-            android:id="@+id/txtNombreUsurio"
+            android:id="@+id/lblNombreMascota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_margin="@dimen/text_margin_publicacion"
-            android:textSize="@dimen/text_size_titulo"
-            android:text="Nombre" />
+            android:layout_weight="1"
+            android:text="Nombre"
+            android:textSize="@dimen/text_size_titulo" />
 
         <TextView
-            android:id="@+id/txtHora"
+            android:id="@+id/lblHoraPublicacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_margin="@dimen/text_margin_publicacion"
-            android:textSize="@dimen/text_size_publicacion"
-            android:text="hora" />
+            android:layout_weight="1"
+            android:text="hora"
+            android:textSize="@dimen/text_size_publicacion" />
 
         <TextView
-            android:id="@+id/txtFecha"
+            android:id="@+id/lblFechaPublicacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_margin="@dimen/text_margin_publicacion"
-            android:textSize="@dimen/text_size_publicacion"
-            android:text="fecha" />
+            android:layout_weight="1"
+            android:text="fecha"
+            android:textSize="@dimen/text_size_publicacion" />
 
     </LinearLayout>
 
@@ -96,16 +90,8 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtNombreMascota"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/text_margin_publicacion"
-                android:text="Nombre:"
-                android:textSize="@dimen/text_size_publicacion" />
-
-            <TextView
                 android:id="@+id/txtDonde"
-                android:layout_width="match_parent"
+                android:layout_width="87dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/text_margin_publicacion"
                 android:text="Donde:"
@@ -113,7 +99,7 @@
 
             <TextView
                 android:id="@+id/txtPresupuesto"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/text_margin_publicacion"
                 android:text="Recompensa:"
@@ -125,14 +111,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txtNombreMascotaInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/text_margin_publicacion"
-                android:text=""
-                android:textSize="@dimen/text_size_publicacion" />
 
             <TextView
                 android:id="@+id/txtDondeInput"

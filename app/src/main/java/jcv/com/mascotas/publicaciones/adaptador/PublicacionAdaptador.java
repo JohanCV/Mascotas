@@ -35,10 +35,13 @@ public class PublicacionAdaptador extends RecyclerView.Adapter<PublicacionAdapta
     @Override
     public void onBindViewHolder(@NonNull ViewHolderPublicacion viewHolderPublicacion, int position) {
 
-        viewHolderPublicacion.fecha.setText(listPublicacion.get(position).getFecha_perdida().toString());
-        viewHolderPublicacion.nombreMascota.setText(listPublicacion.get(position).getFecha_perdida().toString());
+        viewHolderPublicacion.fechaPublicacion.setText(listPublicacion.get(position).getFecha_perdida().toString());
+
+        viewHolderPublicacion.nombreMascota.setText(listPublicacion.get(position).getEstado().toString());
         viewHolderPublicacion.dondeMascota.setText(listPublicacion.get(position).getLatitud_perdida().toString());
         viewHolderPublicacion.recompensaMascota.setText(listPublicacion.get(position).getRecompensa().toString());
+
+
     }
 
     @Override
@@ -48,21 +51,20 @@ public class PublicacionAdaptador extends RecyclerView.Adapter<PublicacionAdapta
 
     public class ViewHolderPublicacion extends RecyclerView.ViewHolder {
 
-        TextView nombreUsuario, fecha, hora;
-        TextView nombreMascota, dondeMascota, recompensaMascota;
+        TextView nombreMascota, fechaPublicacion, horaPublicacion;
+        TextView  dondeMascota, recompensaMascota;
 
-        ImageView imgUser, imgMascota;
+        ImageView  imgMascota;
 
         public ViewHolderPublicacion(@NonNull View itemView) {
             super(itemView);
 
-            imgUser = itemView.findViewById(R.id.imgUsuario);
-            nombreUsuario = itemView.findViewById(R.id.txtNombreUsurio);
-            fecha = itemView.findViewById(R.id.txtFecha);
-            hora =itemView.findViewById(R.id.txtHora);
+
+            nombreMascota = itemView.findViewById(R.id.lblNombreMascota);
+            fechaPublicacion = itemView.findViewById(R.id.lblFechaPublicacion);
+            horaPublicacion =itemView.findViewById(R.id.lblHoraPublicacion);
 
             imgMascota = itemView.findViewById(R.id.imgMascota);
-            nombreMascota = itemView.findViewById(R.id.txtNombreMascotaInput);
             dondeMascota = itemView.findViewById(R.id.txtDondeInput);
             recompensaMascota = itemView.findViewById(R.id.txtPresupuestoInput);
         }
