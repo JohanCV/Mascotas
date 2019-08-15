@@ -7,18 +7,22 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 import jcv.com.mascotas.R;
+import jcv.com.mascotas.modelo.Mascota;
 import jcv.com.mascotas.modelo.Publicacion;
 
 public class PublicacionAdaptador extends RecyclerView.Adapter<PublicacionAdaptador.ViewHolderPublicacion> {
 
     private Context context;
     private List<Publicacion> listPublicacion;
+
 
     public PublicacionAdaptador(Context context, List<Publicacion> listPublicacion){
         this.context = context;
@@ -36,13 +40,12 @@ public class PublicacionAdaptador extends RecyclerView.Adapter<PublicacionAdapta
     public void onBindViewHolder(@NonNull ViewHolderPublicacion viewHolderPublicacion, int position) {
 
         viewHolderPublicacion.fechaPublicacion.setText(listPublicacion.get(position).getFecha_perdida().toString());
-
-        viewHolderPublicacion.nombreMascota.setText(listPublicacion.get(position).getEstado().toString());
+        viewHolderPublicacion.nombreMascota.setText(listPublicacion.get(position).getMascota().getNombre());
         viewHolderPublicacion.dondeMascota.setText(listPublicacion.get(position).getLatitud_perdida().toString());
         viewHolderPublicacion.recompensaMascota.setText(listPublicacion.get(position).getRecompensa().toString());
+        Glide.with(context).load(listPublicacion.get(position).getMascota().getFotomascota().get(1));
 
-
-    }
+       }
 
     @Override
     public int getItemCount() {
@@ -65,6 +68,7 @@ public class PublicacionAdaptador extends RecyclerView.Adapter<PublicacionAdapta
             horaPublicacion =itemView.findViewById(R.id.lblHoraPublicacion);
 
             imgMascota = itemView.findViewById(R.id.imgMascota);
+
             dondeMascota = itemView.findViewById(R.id.txtDondeInput);
             recompensaMascota = itemView.findViewById(R.id.txtPresupuestoInput);
         }

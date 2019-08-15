@@ -16,7 +16,7 @@ import retrofit2.http.Query;
 
 
 public interface ServicioMascota {
-    String url = "http://192.168.43.141:8000/";
+    String url = "http://proyectosmovil.pythonanywhere.com/";
 
     @FormUrlEncoded
     @POST("/appatas/mascota/")

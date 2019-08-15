@@ -664,7 +664,6 @@ public class CrearPerfilActivity extends AppCompatActivity {
         Fotoperfil = findViewById(R.id.FotoPerfil);
         SubirFoto = findViewById((R.id.SubirFoto));
 
-
         //Aqui arranca y carga los departamentos
         departamento = (Spinner) findViewById(R.id.departamento);
         provincia = (Spinner) findViewById(R.id.provincia);
