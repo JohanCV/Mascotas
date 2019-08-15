@@ -16,7 +16,7 @@ import retrofit2.http.Query;
 
 
 public interface ServicioMascota {
-    String url = "http://172.23.8.151:8000";
+    String url = "http://192.168.43.141:8000/";
 
     @FormUrlEncoded
     @POST("/appatas/mascota/")
@@ -28,7 +28,7 @@ public interface ServicioMascota {
 
     @Multipart
     @POST("/appatas/foto_mascota/")
-    Call<ResponseBody> subirFotoMascota(@Part MultipartBody.Part image,  @Query("mascota") int mascota);
+    Call<ResponseBody> subirFotoMascota(@Part MultipartBody.Part image,  @Part("mascota") RequestBody mascota);
 
 }
 
