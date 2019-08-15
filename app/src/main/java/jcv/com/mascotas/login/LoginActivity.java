@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,17 +27,60 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+
 public class LoginActivity extends AppCompatActivity {
 
     private TextView crearCuenta;
     TextInputEditText usuario;
     TextInputEditText password;
 
+    CallbackManager callbackManager;
+
     private Button btnLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //inicio con facebook
+        callbackManager = CallbackManager.Factory.create();
+        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions("email");
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Log.d("iniciofb", "logeo");
+                Toast.makeText(getApplicationContext()
+                        ,loginResult.getAccessToken().toString()
+                        , Toast.LENGTH_LONG).show();
+                Intent iniciarsession = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(iniciarsession);
+
+
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+                Log.d("iniciofb", "cancel");
+                Toast.makeText(getApplicationContext(),"Cancelado", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                Log.d("iniciofb", "Error");
+                Toast.makeText(getApplicationContext(),"Error", Toast.LENGTH_LONG).show();
+            }
+        });
+
 
         findElemente();
         event();
@@ -86,10 +130,6 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                 });
-
-
-
-
             }
         });
 
@@ -100,5 +140,11 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(crearcuenta);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
