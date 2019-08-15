@@ -1,10 +1,20 @@
 package jcv.com.mascotas.publicaciones;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.loader.content.CursorLoader;
 import jcv.com.mascotas.R;
+import jcv.com.mascotas.login.LoginActivity;
 import jcv.com.mascotas.modelo.Mascota;
 import jcv.com.mascotas.modelo.Publicacion;
+import jcv.com.mascotas.servicios.ServicioMascota;
 import jcv.com.mascotas.servicios.ServicioPublicacion;
+import jcv.com.mascotas.usuario.PerfilEditarActivity;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -12,10 +22,15 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,7 +41,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -50,7 +67,7 @@ public class CrearPublicacionActivity extends AppCompatActivity {
     private ImageButton fotos;
     private int posicion;
     private static final int PICK_IMAGE = 100;
-    Uri imageUri;
+    Uri selectedImage;
     List<Mascota> mascotas;
 
 
@@ -89,7 +106,8 @@ public class CrearPublicacionActivity extends AppCompatActivity {
         btn_publicar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Crear_publicacion();
+               // Crear_publicacion();
+                SubirFoto();
             }
         });
 
@@ -112,7 +130,44 @@ public class CrearPublicacionActivity extends AppCompatActivity {
             }
         });
 
+        fotos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(
+                        CrearPublicacionActivity.this);
+                myAlertDialog.setTitle("Upload Pictures Option");
+                myAlertDialog.setMessage("How do you want to set your picture?");
 
+                myAlertDialog.setPositiveButton("Gallery",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                Intent intent=new Intent(Intent.ACTION_PICK);
+                                // Sets the type as image/*. This ensures only components of type image are selected
+                                intent.setType("image/*");
+                                //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
+                                String[] mimeTypes = {"image/jpeg", "image/png"};
+                                intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
+                                // Launching the Intent
+                                startActivityForResult(intent,1);
+
+                            }
+                        });
+
+                myAlertDialog.setNegativeButton("Camera",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface arg0, int arg1) {
+
+                                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                                    startActivityForResult(takePictureIntent, 2);
+                                }
+
+                            }
+                        });
+                myAlertDialog.show();
+
+            }
+        });
     }
 
 
@@ -136,9 +191,11 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                     case 200:
                         Publicacion p = response.body();
                         Log.e("publicar", "" + p.getRecompensa());
+
                         break;
                     default:
                         Log.e("errorp", "" + response.code());
+
                 }
             }
 
@@ -198,12 +255,48 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_spinner_escoger_mascota, perros);
                         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                         spinner.setAdapter(adapter);
+
                         break;
                 }
             }
 
             @Override
             public void onFailure(Call<List<Mascota>> call, Throwable t) {
+                Log.e("Error Appatas", t.getMessage());
+            }
+        });
+    }
+
+    public void SubirFoto(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ServicioMascota Serviciopublicacion = retrofit.create(ServicioMascota.class);
+        File file = new File(getRealPathFromURI(selectedImage));
+
+
+        RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("foto",file.getName(),reqFile);
+        RequestBody mascota = RequestBody.create(MediaType.parse("text/plain"),"1");
+
+
+        //
+        Call<ResponseBody> call = Serviciopublicacion.subirFotoMascota( body,  mascota);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.e("Codigo ", response.code() + "");
+                Log.e("Codigo ", response.body().toString() + "");
+                switch (response.code()) {
+                    case 200:
+                        Log.e("Foto Firulais", "Siii lo logre");
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("Error Appatas", t.getMessage());
             }
         });
@@ -224,5 +317,24 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            selectedImage = data.getData();
+            fotos.setImageURI(selectedImage);
+        }
+    }
+    private String getRealPathFromURI(Uri contentUri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader loader = new CursorLoader(this, contentUri, proj, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result = cursor.getString(column_index);
+        cursor.close();
+        return result;
     }
 }

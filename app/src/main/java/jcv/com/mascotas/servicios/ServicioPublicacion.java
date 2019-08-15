@@ -14,7 +14,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ServicioPublicacion {
-    public String url = "http://proyectosmovil.pythonanywhere.com";
+    String url = "http://proyectosmovil.pythonanywhere.com";
 
     @GET("/appatas/publicacion_list/")
     Call<List<Publicacion>> listarPublicacion();
