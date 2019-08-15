@@ -22,5 +22,11 @@
     <string name="formato_fecha">dd/mm/yyyy</string>
     <string name="title_activity_mapa">Map</string>
 
+    <!-- menu creacion del publicacion -->
+    <string name="menu_publicar_editar">Editar</string>
+    <string name="menu_publicar_eliminar">Eliminar</string>
+
+    <string name="menu_acceder_camara">Cámara</string>
+    <string name="menu_acceder_galeria">Galería</string>
 
 </resources>
