@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.loader.content.CursorLoader;
 import jcv.com.mascotas.R;
 import jcv.com.mascotas.login.LoginActivity;
+import jcv.com.mascotas.mascota.MascotaActivity;
 import jcv.com.mascotas.modelo.Mascota;
 import jcv.com.mascotas.modelo.Publicacion;
 import jcv.com.mascotas.servicios.ServicioMascota;
@@ -41,6 +42,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -51,6 +53,8 @@ import java.util.List;
 import static jcv.com.mascotas.servicios.ServicioPublicacion.url;
 
 public class CrearPublicacionActivity extends AppCompatActivity {
+    private ImageView regresar;
+    private TextView nombreCabecera;
     private CheckBox chk_recompensa;
     private EditText txt_recompensa;
     private EditText txt_Fecha_perdida;
@@ -81,6 +85,8 @@ public class CrearPublicacionActivity extends AppCompatActivity {
     }
 
     private void findElemente() {
+        regresar =(ImageView) findViewById(R.id.regresarPerfilEditar);
+        nombreCabecera = (TextView) findViewById(R.id.perfilUsuarioNombreEditar);
         ib_ObtenerFecha = (ImageButton) findViewById(R.id.ib_obtener_fecha);
         chk_recompensa = (CheckBox) findViewById(R.id.chk_recompensa);
         txt_recompensa = (EditText) findViewById(R.id.txt_recompensa);
@@ -94,6 +100,15 @@ public class CrearPublicacionActivity extends AppCompatActivity {
     }
 
     private void eventos() {
+        regresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent regresarHome = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(regresarHome);
+            }
+        });
+
+        nombreCabecera.setText("Crear Mi Publicación");
         Listar_mascota_usuario();
         habilitar_recompensa();
         ib_ObtenerFecha.setOnClickListener(new View.OnClickListener() {

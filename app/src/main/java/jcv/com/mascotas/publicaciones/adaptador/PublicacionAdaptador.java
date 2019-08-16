@@ -43,7 +43,7 @@ public class PublicacionAdaptador extends RecyclerView.Adapter<PublicacionAdapta
         viewHolderPublicacion.nombreMascota.setText(listPublicacion.get(position).getMascota().getNombre());
         viewHolderPublicacion.dondeMascota.setText(listPublicacion.get(position).getLatitud_perdida().toString());
         viewHolderPublicacion.recompensaMascota.setText(listPublicacion.get(position).getRecompensa().toString());
-        Glide.with(context).load(listPublicacion.get(position).getMascota().getFotomascota().get(1));
+//        Glide.with(context).load(listPublicacion.get(position).getMascota().getFotomascota().get(1));
 
        }
 
