@@ -1,17 +1,21 @@
 package jcv.com.mascotas.publicaciones;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import jcv.com.mascotas.R;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -26,23 +30,45 @@ import com.google.android.gms.tasks.Task;
 
 public class MapaActivity extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
+    private Button btn_ubicacion;
+    private LatLng miubicacion;
     FusedLocationProviderClient mFusedLocationProviderClient;
     Location mLastKnownLocation;
+    String locals;
     private static final int DEFAUL_ZOOM = 15;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private static boolean mLocationPermissionGranted;
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==2)
+        {
+
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa);
+        btn_ubicacion=(Button)findViewById(R.id.btn_enviar_ubicacion);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         mFusedLocationProviderClient=new FusedLocationProviderClient(this);
+
+        btn_ubicacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent ubicacionmap = new Intent(getApplicationContext(), CrearPublicacionActivity.class);
+                startActivityForResult(ubicacionmap,2);
+            }
+        });
+
+
     }
 
 
@@ -67,7 +93,7 @@ public class MapaActivity extends FragmentActivity implements OnMapReadyCallback
         getLocationPermission();
         updateLocationUI();
         getDeviceLocation();
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+       mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
                 mMap.addMarker(new MarkerOptions().position(latLng).title("Marker")
@@ -100,7 +126,6 @@ public class MapaActivity extends FragmentActivity implements OnMapReadyCallback
             case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
-
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     mLocationPermissionGranted = true;
                 }
@@ -108,21 +133,18 @@ public class MapaActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         updateLocationUI();
-
-
     }
+
     private void updateLocationUI() {
         //si es que no tenemos mapa no hace nada
         if (mMap == null) {
             return;
         }
         try {
-
             if (mLocationPermissionGranted) {
                 mMap.setMyLocationEnabled(true);
 
                 mMap.getUiSettings().setMyLocationButtonEnabled(true);
-
 
             } else {
                 mMap.setMyLocationEnabled(false);
@@ -135,6 +157,7 @@ public class MapaActivity extends FragmentActivity implements OnMapReadyCallback
             Log.e("Exception: %s", e.getMessage());
         }
     }
+
     private void getDeviceLocation() {
         /*
          * Get the best and most recent location of the device, which may be null in rare
@@ -151,16 +174,17 @@ public class MapaActivity extends FragmentActivity implements OnMapReadyCallback
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
 
-                            LatLng miubicacion=new LatLng(mLastKnownLocation.getLatitude(),mLastKnownLocation.getLongitude());
+                            miubicacion=new LatLng(mLastKnownLocation.getLatitude(),mLastKnownLocation.getLongitude());
                             Log.e("mapa",mLastKnownLocation.toString() );
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(miubicacion,15));
-                            mMap.addMarker(new MarkerOptions().position(miubicacion).title("Marker"));
+
+
+                            //mMap.addMarker(new MarkerOptions().position(miubicacion).title("Marker"));
                         } else {
 
                         }
                     }
                 });
-
             }
         } catch(SecurityException e)  {
             Log.e("Exception: %s", e.getMessage());

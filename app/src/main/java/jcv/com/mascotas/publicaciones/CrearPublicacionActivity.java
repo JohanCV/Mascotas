@@ -100,6 +100,8 @@ public class CrearPublicacionActivity extends AppCompatActivity {
     }
 
     private void eventos() {
+
+
         regresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,11 +109,11 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                 startActivity(regresarHome);
             }
         });
-
         nombreCabecera.setText("Crear Mi Publicación");
-
-        Listar_mascota_usuario();
         habilitar_recompensa();
+        Listar_mascota_usuario();
+
+
         ib_ObtenerFecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,10 +124,11 @@ public class CrearPublicacionActivity extends AppCompatActivity {
         btn_publicar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Crear_publicacion();
-                SubirFoto();
+                Crear_publicacion();
+
             }
         });
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -151,10 +154,10 @@ public class CrearPublicacionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(
                         CrearPublicacionActivity.this);
-                myAlertDialog.setTitle("Upload Pictures Option");
-                myAlertDialog.setMessage("How do you want to set your picture?");
+                myAlertDialog.setTitle("Subir fotos");
+                //myAlertDialog.setMessage("¿Cómo quieres configurar tu imagen?");
 
-                myAlertDialog.setPositiveButton("Gallery",
+                myAlertDialog.setPositiveButton("Galería",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface arg0, int arg1) {
                                 Intent intent=new Intent(Intent.ACTION_PICK);
@@ -165,11 +168,10 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                                 intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
                                 // Launching the Intent
                                 startActivityForResult(intent,1);
-
                             }
                         });
 
-                myAlertDialog.setNegativeButton("Camera",
+                /*myAlertDialog.setNegativeButton("Camera",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface arg0, int arg1) {
 
@@ -177,11 +179,9 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                                 if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                                     startActivityForResult(takePictureIntent, 2);
                                 }
-
                             }
-                        });
+                        });*/
                 myAlertDialog.show();
-
             }
         });
     }
@@ -204,14 +204,13 @@ public class CrearPublicacionActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Publicacion> call, Response<Publicacion> response) {
                 switch (response.code()) {
-                    case 200:
+                    case 201:
                         Publicacion p = response.body();
                         Log.e("publicar", "" + p.getRecompensa());
-
+                        SubirFoto();
                         break;
                     default:
                         Log.e("errorp", "" + response.code());
-
                 }
             }
 
@@ -244,7 +243,6 @@ public class CrearPublicacionActivity extends AppCompatActivity {
         }, dia, mes, anio);
         //Muestro el widget
         recogerFecha.show();
-
     }
 
     private void Listar_mascota_usuario() {
@@ -252,8 +250,8 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        ServicioPublicacion Ssrviciopublicacion = retrofit.create(ServicioPublicacion.class);
-        Call<List<Mascota>> call = Ssrviciopublicacion.listar_mascocas_usuario(4);
+        ServicioPublicacion serviciopublicacion = retrofit.create(ServicioPublicacion.class);
+        Call<List<Mascota>> call = serviciopublicacion.listar_mascotas_usuario(4);
         call.enqueue(new Callback<List<Mascota>>() {
             @Override
             public void onResponse(Call<List<Mascota>> call, Response<List<Mascota>> response) {
@@ -267,11 +265,9 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                             Log.e("app", p.getNombre() + "");
                             perros.add(p.getNombre());
                         }
-
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_spinner_escoger_mascota, perros);
                         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                         spinner.setAdapter(adapter);
-
                         break;
                 }
             }
@@ -291,11 +287,9 @@ public class CrearPublicacionActivity extends AppCompatActivity {
         ServicioMascota Serviciopublicacion = retrofit.create(ServicioMascota.class);
         File file = new File(getRealPathFromURI(selectedImage));
 
-
         RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("foto",file.getName(),reqFile);
         RequestBody mascota = RequestBody.create(MediaType.parse("text/plain"),"1");
-
 
         //
         Call<ResponseBody> call = Serviciopublicacion.subirFotoMascota( body,  mascota);
@@ -305,12 +299,11 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                 Log.e("Codigo ", response.code() + "");
                 Log.e("Codigo ", response.body().toString() + "");
                 switch (response.code()) {
-                    case 200:
+                    case 201:
                         Log.e("Foto Firulais", "Siii lo logre");
                         break;
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("Error Appatas", t.getMessage());
@@ -326,7 +319,7 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                 //is chkIos checked?
                 if (((CheckBox) v).isChecked()) {
                     txt_recompensa.setEnabled(true);
-                    txt_recompensa.findFocus();
+                    txt_recompensa.requestFocus();
                 } else {
                     txt_recompensa.setEnabled(false);
                     txt_recompensa.setText("");

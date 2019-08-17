@@ -1,5 +1,7 @@
 package jcv.com.mascotas.servicios;
 
+import java.util.List;
+
 import jcv.com.mascotas.modelo.Mascota;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -29,6 +31,8 @@ public interface ServicioMascota {
     @Multipart
     @POST("/appatas/foto_mascota/")
     Call<ResponseBody> subirFotoMascota(@Part MultipartBody.Part image,  @Part("mascota") RequestBody mascota);
+
+
 
 }
 
