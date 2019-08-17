@@ -109,6 +109,7 @@ public class CrearPublicacionActivity extends AppCompatActivity {
         });
 
         nombreCabecera.setText("Crear Mi Publicación");
+
         Listar_mascota_usuario();
         habilitar_recompensa();
         ib_ObtenerFecha.setOnClickListener(new View.OnClickListener() {

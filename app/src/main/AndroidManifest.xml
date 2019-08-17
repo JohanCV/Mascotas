@@ -40,13 +40,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".login.LoginActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".login.LoginActivity" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name=".Encontrar.EncontrarActivity" />
         <activity android:name=".localizados.LocalizadoActivity" />
         <activity android:name=".mascota.MascotaActivity" />
@@ -57,8 +52,13 @@
         <activity android:name=".mascota.DetalleMascotaActivity" />
         <activity android:name=".mascota.MascotaEditarActivity" />
 
-        <activity android:name=".publicaciones.HomeActivity"/>
+        <activity android:name=".publicaciones.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".publicaciones.CrearPublicacionActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
