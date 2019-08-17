@@ -11,5 +11,6 @@ public class CrearPublicacionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_publicacion);
+        String locasl;
     }
 }
