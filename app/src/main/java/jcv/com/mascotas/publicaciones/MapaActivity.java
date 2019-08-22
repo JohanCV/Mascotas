@@ -39,7 +39,6 @@ public class MapaActivity extends FragmentActivity implements OnMapReadyCallback
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private static boolean mLocationPermissionGranted;
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -63,8 +62,12 @@ public class MapaActivity extends FragmentActivity implements OnMapReadyCallback
         btn_ubicacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent ubicacionmap = new Intent(getApplicationContext(), CrearPublicacionActivity.class);
-                startActivityForResult(ubicacionmap,2);
+
+                Intent ubicacionmap = new Intent();
+                ubicacionmap.putExtra("latitud",miubicacion.latitude);
+                ubicacionmap.putExtra("longitud",miubicacion.longitude);
+                setResult(CrearPublicacionActivity.RESULT_OK,ubicacionmap);
+                finish();
             }
         });
 

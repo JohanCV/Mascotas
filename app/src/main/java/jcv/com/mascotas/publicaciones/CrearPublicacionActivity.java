@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.loader.content.CursorLoader;
+import io.github.wangeason.multiphotopicker.utils.PhotoPickerIntent;
 import jcv.com.mascotas.R;
 import jcv.com.mascotas.login.LoginActivity;
 import jcv.com.mascotas.mascota.MascotaActivity;
@@ -73,6 +74,8 @@ public class CrearPublicacionActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     Uri selectedImage;
     List<Mascota> mascotas;
+    private Bundle datosmapa;
+    private Double latitud,longitud;
 
 
     @Override
@@ -124,6 +127,7 @@ public class CrearPublicacionActivity extends AppCompatActivity {
         btn_publicar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Crear_publicacion();
 
             }
@@ -145,7 +149,7 @@ public class CrearPublicacionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentmapa = new Intent(getApplicationContext(), MapaActivity.class);
-                startActivity(intentmapa);
+                startActivityForResult(intentmapa,2);
             }
         });
 
@@ -198,8 +202,8 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                 Double.parseDouble(txt_recompensa.getText().toString()),
                 txt_Fecha_perdida.getText().toString(),
                 mascotas.get(posicion).getId(),
-                1.0,
-                1.0);
+                latitud,
+                longitud);
         registrar_publicacion.enqueue(new Callback<Publicacion>() {
             @Override
             public void onResponse(Call<Publicacion> call, Response<Publicacion> response) {
@@ -278,7 +282,14 @@ public class CrearPublicacionActivity extends AppCompatActivity {
             }
         });
     }
-
+public void MultiPhoto(){
+    PhotoPickerIntent intent = new PhotoPickerIntent(CrearPublicacionActivity.this);
+    intent.setPhotoCount(3);
+    intent.setShowCamera(true);
+    intent.setShowGif(true);
+    intent.setMultiChoose(true);
+    //startActivityForResult(intent, REQUEST_CODE);
+}
     public void SubirFoto(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
@@ -335,6 +346,15 @@ public class CrearPublicacionActivity extends AppCompatActivity {
             selectedImage = data.getData();
             fotos.setImageURI(selectedImage);
         }
+        if (requestCode == 2) {
+            if(resultCode == MapaActivity.RESULT_OK){
+                latitud=data.getDoubleExtra("latitud",0);
+                longitud=data.getDoubleExtra("longitud", 0);
+            }
+            if (resultCode == MapaActivity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
     }
     private String getRealPathFromURI(Uri contentUri) {
         String[] proj = {MediaStore.Images.Media.DATA};
@@ -346,4 +366,5 @@ public class CrearPublicacionActivity extends AppCompatActivity {
         cursor.close();
         return result;
     }
+
 }
