@@ -288,6 +288,8 @@ public void MultiPhoto(){
     intent.setShowCamera(true);
     intent.setShowGif(true);
     intent.setMultiChoose(true);
+    //https://github.com/wangeason/MultiPhotoPicker
+    //https://github.com/nileshpambhar/MultiPhotoPicker
     //startActivityForResult(intent, REQUEST_CODE);
 }
     public void SubirFoto(){
