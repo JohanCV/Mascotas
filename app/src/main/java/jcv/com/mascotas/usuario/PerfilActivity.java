@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -58,7 +59,14 @@ public class PerfilActivity extends AppCompatActivity {
                         break;
                     case R.id.menu_perfil_sali:
                         Intent intentCerrarSession = new Intent(getApplicationContext(), LoginActivity.class);
-                        //hay q eliminar la session del usuario
+                        SharedPreferences prefs =
+                                getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putInt("id", 0 );
+                        editor.putString("token", "" );
+                        editor.putString("email_usuario", "");
+                        editor.commit();
                         startActivity(intentCerrarSession);
                         break;
                 }

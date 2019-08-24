@@ -1,18 +1,22 @@
 package jcv.com.mascotas.modelo;
 
+import java.util.List;
+
 public class Mascota {
     int id;
     String nombre;
     String sexo;
     String observaciones;
     int raza;
+    List<FotoMascota>fotomascota;
 
-    public Mascota(int id, String nombre, String sexo, String observaciones, int raza) {
+    public Mascota(int id, String nombre, String sexo, String observaciones, int raza, List<FotoMascota> fotomascota) {
         this.id = id;
         this.nombre = nombre;
         this.sexo = sexo;
         this.observaciones = observaciones;
         this.raza = raza;
+        this.fotomascota = fotomascota;
     }
 
     public int getId() {
@@ -53,5 +57,13 @@ public class Mascota {
 
     public void setRaza(int raza) {
         this.raza = raza;
+    }
+
+    public List<FotoMascota> getFotomascota() {
+        return fotomascota;
+    }
+
+    public void setFotomascota(List<FotoMascota> fotomascota) {
+        this.fotomascota = fotomascota;
     }
 }

@@ -64,7 +64,10 @@
                 android:id="@+id/edtxtPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/password" />
+
+                android:hint="@string/password"
+                android:visibility="visible"
+                android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
@@ -102,6 +105,16 @@
         android:layout_marginTop="496dp"
         android:text="Olvidaste tu contraseña?"
         android:textColor="@color/colorBlueWhite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="536dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

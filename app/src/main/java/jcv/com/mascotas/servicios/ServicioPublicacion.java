@@ -14,14 +14,14 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ServicioPublicacion {
-    public String url = "http://proyectosmovil.pythonanywhere.com";
+    String url = "http://proyectosmovil.pythonanywhere.com";
 
     @GET("/appatas/publicacion_list/")
     Call<List<Publicacion>> listarPublicacion();
 
 
     @GET ("/appatas/mascotas/{usuario}/")
-    Call<List<Mascota>>listar_mascocas_usuario(@Path("usuario") int usuario);
+    Call<List<Mascota>>listar_mascotas_usuario(@Path("usuario") int usuario);
 
 
     @POST("/appatas/publicacion/")
@@ -31,8 +31,6 @@ public interface ServicioPublicacion {
                                            @Field("mascota")int mascota,
                                            @Field("latitud_perdida")Double latitud_perdida,
                                            @Field("longitud_perdida")Double longitud_perdida);
-
-
 
     @PUT("/appatas/publicacion/{pk}/")
     @FormUrlEncoded
