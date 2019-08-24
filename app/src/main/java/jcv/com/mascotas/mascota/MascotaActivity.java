@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,12 +18,21 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import jcv.com.mascotas.R;
 import jcv.com.mascotas.mascota.adaptador.MascotaAdaptador;
 import jcv.com.mascotas.modelo.Mascota;
+import jcv.com.mascotas.servicios.ServicioPublicacion;
 import jcv.com.mascotas.utils.BottomNavigationViewHelper;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static jcv.com.mascotas.servicios.ServicioPublicacion.url;
 
 public class MascotaActivity extends AppCompatActivity {
     private static final String TAG = "MascotaActivity";
@@ -42,19 +52,19 @@ public class MascotaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mascota_perfil);
         Log.d(TAG, " On create: Starting");
 
-        findElemente();
+        findElements();
         setUpBottomNavigationview();
         events();
     }
 
-    private void findElemente() {
+    private void findElements() {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         floatingActionButtonMascota = findViewById(R.id.floatingActionButtonMascota);
 
         recyclerView = findViewById(R.id.rv_mis_mascotas);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        //llenarListaBaseDatos();
-        mascotaAdaptador = new MascotaAdaptador(getApplicationContext(),listMascotas);
+        llenarListaBaseDatos();
+
 
         recyclerView.setAdapter(mascotaAdaptador);
     }
@@ -76,18 +86,51 @@ public class MascotaActivity extends AppCompatActivity {
             }
         });
 
-        mascotaAdaptador.setOnClickListener(new View.OnClickListener() {
+
+
+    }
+    private void llenarListaBaseDatos(){
+        //listMascotas.add(new Mascota(1,"firulais","M","cojea",1));
+        //listMascotas.add(new Mascota(2,"pelucas","M","plateado",1));
+        //listMascotas.add(new Mascota(3,"mailo","F","bebe",1));
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ServicioPublicacion Ssrviciopublicacion = retrofit.create(ServicioPublicacion.class);
+        Call<List<Mascota>> call = Ssrviciopublicacion.listar_mascocas_usuario(4);
+        call.enqueue(new Callback<List<Mascota>>() {
             @Override
-            public void onClick(View view) {
-                Intent intentdetalles = new Intent(getApplicationContext(), DetalleMascotaActivity.class);
-                startActivity(intentdetalles);
+            public void onResponse(Call<List<Mascota>> call, Response<List<Mascota>> response) {
+                Log.e("Codigo ", response.code() + "");
+                switch (response.code()) {
+                    case 200:
+                        Log.e("msj", response.body().toString());
+                        listMascotas = response.body();
+                        List<String> perros = new LinkedList<>();
+                        for (Mascota p : listMascotas) {
+                            Log.e("app", p.getNombre() + "");
+                            perros.add(p.getNombre());
+                        }
+
+                        mascotaAdaptador = new MascotaAdaptador(getApplicationContext(),listMascotas);
+                        mascotaAdaptador.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intentdetalles = new Intent(getApplicationContext(), DetalleMascotaActivity.class);
+                                startActivity(intentdetalles);
+                            }
+                        });
+                        recyclerView.setAdapter(mascotaAdaptador);
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Mascota>> call, Throwable t) {
+                Log.e("Error Appatas", t.getMessage());
             }
         });
 
     }
-/*    private void llenarListaBaseDatos(){
-        listMascotas.add(new Mascota("firulais","doberman","cojea"));
-        listMascotas.add(new Mascota("pelucas","siberiano","plateado"));
-        listMascotas.add(new Mascota("mailo","pubg","bebe"));
-    }*/
 }
