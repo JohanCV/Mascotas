@@ -61,11 +61,13 @@ public class CrearPublicacionActivity extends AppCompatActivity {
     private EditText txt_Fecha_perdida;
     private static final String CERO = "0";
     private static final String BARRA = "-";
-    public final Calendar c = Calendar.getInstance();
-    final int mes = c.get(Calendar.MONTH);
-    final int dia = c.get(Calendar.DAY_OF_MONTH);
-    final int anio = c.get(Calendar.YEAR);
+    //Calendario
+    private  Calendar calendar;
+    private int mes;
+    private int dia;
+    private int anio;
     private ImageButton ib_ObtenerFecha;
+
     private Button btn_publicar;
     private Spinner spinner;
     private ImageView mapa;
@@ -76,6 +78,9 @@ public class CrearPublicacionActivity extends AppCompatActivity {
     List<Mascota> mascotas;
     private Bundle datosmapa;
     private Double latitud,longitud;
+
+    public CrearPublicacionActivity() {
+    }
 
 
     @Override
@@ -226,18 +231,24 @@ public class CrearPublicacionActivity extends AppCompatActivity {
     }
 
     private void obtenerFecha() {
+        calendar = Calendar.getInstance();
+        anio = calendar.get(Calendar.YEAR);
+        mes = calendar.get(Calendar.MONTH);
+        dia = calendar.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog recogerFecha = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker view, int dayOfMonth, int month, int year) {
-                //Esta variable lo que realiza es aumentar en uno el mes ya que comienza desde 0 = enero
-                final int mesActual = month + 1;
+            public void onDateSet(DatePicker view, int dia, int mes, int anio) {
+               //Esta variable lo que realiza es aumentar en uno el mes ya que comienza desde 0 = enero
+                /*final int mesActual = mes + 1;
                 //Formateo el día obtenido: antepone el 0 si son menores de 10
-                String diaFormateado = (dayOfMonth < 10) ? CERO + String.valueOf(dayOfMonth) : String.valueOf(dayOfMonth);
+                String diaFormateado = (dia < 10) ? CERO + String.valueOf(dia) : String.valueOf(dia);
                 //Formateo el mes obtenido: antepone el 0 si son menores de 10
                 String mesFormateado = (mesActual < 10) ? CERO + String.valueOf(mesActual) : String.valueOf(mesActual);
                 //Muestro la fecha con el formato deseado
-                txt_Fecha_perdida.setText(diaFormateado + BARRA + mesFormateado + BARRA + year);
+
+                txt_Fecha_perdida.setText(diaFormateado + BARRA + mesFormateado + BARRA + anio);*/
+                txt_Fecha_perdida.setText(dia+"/"+(mes+1)+"/"+anio);
 
             }
             //Estos valores deben ir en ese orden, de lo contrario no mostrara la fecha actual
@@ -246,6 +257,7 @@ public class CrearPublicacionActivity extends AppCompatActivity {
              */
         }, dia, mes, anio);
         //Muestro el widget
+        recogerFecha.getDatePicker().setMaxDate(System.currentTimeMillis());
         recogerFecha.show();
     }
 
