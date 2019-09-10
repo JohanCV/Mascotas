@@ -41,11 +41,11 @@
         android:layout_marginStart="3dp"
         android:layout_marginTop="119dp"
         android:text="Raza:"
-        app:layout_constraintStart_toStartOf="@+id/editText5"
+        app:layout_constraintStart_toStartOf="@+id/txt_enfermedadmascota"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/txt_enfermedadmascota"
         android:layout_width="0dp"
         android:layout_height="49dp"
         android:layout_marginStart="26dp"
@@ -78,13 +78,13 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner6"
-        app:layout_constraintEnd_toEndOf="@+id/spinner6"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_color"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_color"
         app:layout_constraintStart_toStartOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_enfermedadmascota" />
 
     <Spinner
-        android:id="@+id/spinner6"
+        android:id="@+id/spinner_color"
         android:layout_width="161dp"
         android:layout_height="20dp"
         android:layout_marginStart="1dp"
@@ -99,7 +99,7 @@
         android:layout_width="0dp"
         android:layout_height="15dp"
         android:layout_marginTop="218dp"
-        app:layout_constraintEnd_toEndOf="@+id/editText5"
+        app:layout_constraintEnd_toEndOf="@+id/txt_enfermedadmascota"
         app:layout_constraintStart_toStartOf="@+id/textView16"
         app:layout_constraintTop_toTopOf="@+id/nombre_mascota" />
 
@@ -119,10 +119,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="Color blanco"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner6"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner_color"
         app:layout_constraintEnd_toEndOf="@+id/spinner7"
         app:layout_constraintStart_toStartOf="@+id/textView13"
-        app:layout_constraintTop_toTopOf="@+id/spinner6" />
+        app:layout_constraintTop_toTopOf="@+id/spinner_color" />
 
     <TextView
         android:id="@+id/textView15"
@@ -220,7 +220,7 @@
 
 
     <Button
-        android:id="@+id/btnSave"
+        android:id="@+id/btn_guardarmascota"
         android:layout_width="370dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
