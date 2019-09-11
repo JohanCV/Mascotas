@@ -112,8 +112,6 @@ public class CrearPublicacionActivity extends AppCompatActivity {
         regresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplication(),"Ir Atras", Toast.LENGTH_SHORT).show();
-
                 Intent regresarHome = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(regresarHome);
             }
