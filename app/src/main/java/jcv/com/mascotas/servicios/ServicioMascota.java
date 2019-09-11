@@ -3,6 +3,7 @@ package jcv.com.mascotas.servicios;
 import java.util.List;
 
 import jcv.com.mascotas.modelo.Mascota;
+import jcv.com.mascotas.modelo.caracteristicaMascota;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -28,11 +29,23 @@ public interface ServicioMascota {
                                     @Field("usuario")int usuario,
                                     @Field("raza") int raza);
 
+    @FormUrlEncoded
+    @GET("/appatas/mascota/{id}/")
+    Call<Mascota> detalleMascota (@Path("id") int id);
+
     @Multipart
     @POST("/appatas/foto_mascota/")
     Call<ResponseBody> subirFotoMascota(@Part MultipartBody.Part image,  @Part("mascota") RequestBody mascota);
 
 
+    @GET("/appatas/mascotas/{usuario}/")
+    Call<List<Mascota>> mascotasPorUsuario(@Path("usuario") int usuario);
+
+    @FormUrlEncoded
+    @POST("/appatas/caracteristica/")
+    Call<caracteristicaMascota> registrarCaracteristicasMascotas(@Field("valor")String valor,
+                                                                 @Field("tipo_caracteristica")int tipo_caracteristica,
+                                                                 @Field("mascota") int mascota);
 
 }
 

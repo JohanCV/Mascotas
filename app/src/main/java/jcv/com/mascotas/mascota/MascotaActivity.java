@@ -97,8 +97,8 @@ public class MascotaActivity extends AppCompatActivity {
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        ServicioPublicacion Ssrviciopublicacion = retrofit.create(ServicioPublicacion.class);
-        Call<List<Mascota>> call = Ssrviciopublicacion.listar_mascocas_usuario(4);
+        ServicioPublicacion servicioPublicacion = retrofit.create(ServicioPublicacion.class);
+        Call<List<Mascota>> call = servicioPublicacion.listar_mascotas_usuario(4);
         call.enqueue(new Callback<List<Mascota>>() {
             @Override
             public void onResponse(Call<List<Mascota>> call, Response<List<Mascota>> response) {

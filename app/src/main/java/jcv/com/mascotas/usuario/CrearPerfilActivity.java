@@ -652,7 +652,7 @@ public class CrearPerfilActivity extends AppCompatActivity {
     private void findElemente() {
         regresar = findViewById(R.id.regresarPerfilEditar);
         nombreCabecera = findViewById(R.id.perfilUsuarioNombreEditar);
-        btnSave = findViewById(R.id.btnSave);
+        btnSave = findViewById(R.id.btn_guardarmascota);
         nombre = findViewById(R.id.Nombre);
         apellido = findViewById(R.id.Apellido);
         Email = findViewById(R.id.Email);
