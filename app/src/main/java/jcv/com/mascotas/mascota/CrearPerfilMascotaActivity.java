@@ -17,17 +17,25 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
+
 import jcv.com.mascotas.R;
 import jcv.com.mascotas.login.LoginActivity;
 import jcv.com.mascotas.modelo.Mascota;
 import jcv.com.mascotas.modelo.caracteristicaMascota;
 import jcv.com.mascotas.servicios.ServicioMascota;
 import jcv.com.mascotas.servicios.ServicioPublicacion;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static jcv.com.mascotas.servicios.ServicioPublicacion.url;
 
 public class CrearPerfilMascotaActivity extends AppCompatActivity {
     private ImageView regresar;
@@ -240,6 +248,41 @@ public class CrearPerfilMascotaActivity extends AppCompatActivity {
 
             }
         });
+
+
+        /*public void SubirFoto(){
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(url)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            ServicioMascota Serviciopublicacion = retrofit.create(ServicioMascota.class);
+            File file = new File(getRealPathFromURI(selectedImage));
+
+            RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("foto",file.getName(),reqFile);
+            RequestBody mascota = RequestBody.create(MediaType.parse("text/plain"),"1");
+
+            //
+            Call<ResponseBody> call = Serviciopublicacion.subirFotoMascota( body,  mascota);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    Log.e("Codigo ", response.code() + "");
+                    Log.e("Codigo ", response.body().toString() + "");
+                    switch (response.code()) {
+                        case 201:
+                            Log.e("Foto Firulais", "Siii lo logre");
+                            break;
+                    }
+                }
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Log.e("Error Appatas", t.getMessage());
+                }
+            });*/
+
+
+
 
         nombreCabecera.setText("Crear Mi Mascota");
     }

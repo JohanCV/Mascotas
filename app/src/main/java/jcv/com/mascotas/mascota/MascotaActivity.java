@@ -63,6 +63,7 @@ public class MascotaActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.rv_mis_mascotas);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        //mascotaAdaptador = new MascotaAdaptador(getApplicationContext(),listMascotas);
         llenarListaBaseDatos();
 
 
@@ -101,6 +102,7 @@ public class MascotaActivity extends AppCompatActivity {
         Call<List<Mascota>> call = servicioPublicacion.listar_mascotas_usuario(4);
         call.enqueue(new Callback<List<Mascota>>() {
             @Override
+
             public void onResponse(Call<List<Mascota>> call, Response<List<Mascota>> response) {
                 Log.e("Codigo ", response.code() + "");
                 switch (response.code()) {
