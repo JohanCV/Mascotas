@@ -109,14 +109,16 @@ public class CrearPublicacionActivity extends AppCompatActivity {
 
     private void eventos() {
 
-
         regresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(getApplication(),"Ir Atras", Toast.LENGTH_SHORT).show();
+
                 Intent regresarHome = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(regresarHome);
             }
         });
+
         nombreCabecera.setText("Crear Mi Publicación");
         habilitar_recompensa();
         Listar_mascota_usuario();
@@ -255,7 +257,7 @@ public class CrearPublicacionActivity extends AppCompatActivity {
             /**
              *También puede cargar los valores que usted desee
              */
-        }, dia, mes, anio);
+        }, anio,mes,dia);
         //Muestro el widget
         recogerFecha.getDatePicker().setMaxDate(System.currentTimeMillis());
         recogerFecha.show();
