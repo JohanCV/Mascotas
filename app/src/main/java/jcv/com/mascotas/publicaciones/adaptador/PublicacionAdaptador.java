@@ -20,6 +20,7 @@ import java.util.List;
 import jcv.com.mascotas.R;
 import jcv.com.mascotas.modelo.Mascota;
 import jcv.com.mascotas.modelo.Publicacion;
+import jcv.com.mascotas.publicaciones.DetallePublicacionActivity;
 import jcv.com.mascotas.publicaciones.HomeActivity;
 import jcv.com.mascotas.publicaciones.HomeFragment;
 
@@ -61,8 +62,8 @@ public class PublicacionAdaptador extends RecyclerView.Adapter<PublicacionAdapta
                 public void onClick(View view) {
 
                     Toast.makeText(mAdapter_Publicacion.context,nombreMascota.getText(),Toast.LENGTH_LONG).show();
-                    //Intent irdetalle = new Intent(context, .class);
-                    //context.startActivity(irdetalle);
+                    Intent irdetalle = new Intent(context, DetallePublicacionActivity.class);
+                    context.startActivity(irdetalle);
                 }
             });
             mAdapter_Publicacion=adapter;
