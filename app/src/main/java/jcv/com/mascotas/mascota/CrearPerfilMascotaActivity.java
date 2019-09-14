@@ -1,20 +1,26 @@
 package jcv.com.mascotas.mascota;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
@@ -23,6 +29,7 @@ import jcv.com.mascotas.R;
 import jcv.com.mascotas.login.LoginActivity;
 import jcv.com.mascotas.modelo.Mascota;
 import jcv.com.mascotas.modelo.caracteristicaMascota;
+import jcv.com.mascotas.publicaciones.CrearPublicacionActivity;
 import jcv.com.mascotas.servicios.ServicioMascota;
 import jcv.com.mascotas.servicios.ServicioPublicacion;
 import okhttp3.MediaType;
@@ -49,9 +56,10 @@ public class CrearPerfilMascotaActivity extends AppCompatActivity {
     private Spinner spinner_sexo;
     private EditText txt_accesoriosmascota;
     private EditText txt_enfermedadesmascota;
-    private ImageView iv_foto1;
-    private ImageView iv_foto2;
+    private ImageButton foto_mascota;
+    private ImageView imagen_mascota;
     private Button btn_guardarmascota;
+    private ImageButton boton_camara;
 
     String sexo = "M";
     String edad = "cachorro";
@@ -59,17 +67,12 @@ public class CrearPerfilMascotaActivity extends AppCompatActivity {
     String tamano = "pequeño";
     String peso = "1 kg";
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mascota_perfil_crear);
-
-
-
-
         findElemente();
         event();
-
-
     }
 
     private void findElemente() {
@@ -78,7 +81,9 @@ public class CrearPerfilMascotaActivity extends AppCompatActivity {
         txt_nombremascota = findViewById(R.id.txt_nombremascota);
         txt_razamascota = findViewById(R.id.txt_razamascota);
         txt_accesoriosmascota = findViewById(R.id.txt_accesoriosmascota);
-
+        foto_mascota = findViewById(R.id.foto_mascota);
+        imagen_mascota = findViewById(R.id.imagen_mascota);
+        boton_camara = findViewById(R.id.boton_camara);
         spinner_edad = findViewById(R.id.spinner_edad);
         ArrayAdapter<CharSequence> adapter_edad = ArrayAdapter.createFromResource(this,
                 R.array.edad_mascota, android.R.layout.simple_spinner_item);
@@ -125,6 +130,18 @@ public class CrearPerfilMascotaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Guardar_mascota();
+            }
+        });
+
+        boton_camara.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (MediaStore.ACTION_IMAGE_CAPTURE);
+                if(intent.resolveActivity(getPackageManager())!= null){
+                    startActivityForResult(intent,1);
+
+                }
+
             }
         });
 
@@ -249,46 +266,75 @@ public class CrearPerfilMascotaActivity extends AppCompatActivity {
             }
         });
 
+        foto_mascota.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(
+                        CrearPerfilMascotaActivity.this);
+                myAlertDialog.setTitle("Subir fotos");
+                //myAlertDialog.setMessage("¿Cómo quieres configurar tu imagen?");
 
-        /*public void SubirFoto(){
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(url)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-            ServicioMascota Serviciopublicacion = retrofit.create(ServicioMascota.class);
-            File file = new File(getRealPathFromURI(selectedImage));
+                myAlertDialog.setPositiveButton("Galería",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                Intent intent = new Intent(Intent.ACTION_PICK);
+                                // Sets the type as image/*. This ensures only components of type image are selected
+                                intent.setType("image/*");
+                                //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
+                                String[] mimeTypes = {"image/jpeg", "image/png"};
+                                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+                                // Launching the Intent
+                                startActivityForResult(intent, 1);
+                            }
+                        });
+                myAlertDialog.show();
+            }
+        });
+    }
 
-            RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
-            MultipartBody.Part body = MultipartBody.Part.createFormData("foto",file.getName(),reqFile);
-            RequestBody mascota = RequestBody.create(MediaType.parse("text/plain"),"1");
 
-            //
-            Call<ResponseBody> call = Serviciopublicacion.subirFotoMascota( body,  mascota);
-            call.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    Log.e("Codigo ", response.code() + "");
-                    Log.e("Codigo ", response.body().toString() + "");
-                    switch (response.code()) {
-                        case 201:
-                            Log.e("Foto Firulais", "Siii lo logre");
-                            break;
-                    }
+    public void SubirFoto(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ServicioMascota Serviciopublicacion = retrofit.create(ServicioMascota.class);
+        File file = new File("as"); //TODO: Cambiar
+
+        RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("foto",file.getName(),reqFile);
+        RequestBody mascota = RequestBody.create(MediaType.parse("text/plain"),"1");
+
+        //
+        Call<ResponseBody> call = Serviciopublicacion.subirFotoMascota( body,  mascota);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.e("Codigo ", response.code() + "");
+                Log.e("Codigo ", response.body().toString() + "");
+                switch (response.code()) {
+                    case 201:
+                        Log.e("Foto Firulais", "Siii lo logre");
+                        break;
                 }
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Log.e("Error Appatas", t.getMessage());
-                }
-            });*/
-
-
-
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("Error Appatas", t.getMessage());
+            }
+        });
 
         nombreCabecera.setText("Crear Mi Mascota");
     }
 
-
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1 && resultCode == RESULT_OK){
+            Bitmap bm = data.getParcelableExtra("data");
+            imagen_mascota.setImageBitmap(bm);
+        }
+    }
 
     private void Guardar_mascota(){
         Retrofit retrofit  = new Retrofit.Builder()
@@ -334,16 +380,18 @@ public class CrearPerfilMascotaActivity extends AppCompatActivity {
 
 
 
+
+
     }
 
 
-        private void Guardar_Caracteristica( String valor, int tipo_caracteristica, int mascota){
-            Retrofit retrofit  = new Retrofit.Builder()
-                    .baseUrl(ServicioMascota.url)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-            ServicioMascota servicioMascota = retrofit.create(ServicioMascota.class);
-            Call<caracteristicaMascota> registrarCaracteristicasMascotas = servicioMascota.registrarCaracteristicasMascotas(valor,tipo_caracteristica,mascota);
+    private void Guardar_Caracteristica( String valor, int tipo_caracteristica, int mascota){
+        Retrofit retrofit  = new Retrofit.Builder()
+                .baseUrl(ServicioMascota.url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ServicioMascota servicioMascota = retrofit.create(ServicioMascota.class);
+        Call<caracteristicaMascota> registrarCaracteristicasMascotas = servicioMascota.registrarCaracteristicasMascotas(valor,tipo_caracteristica,mascota);
         registrarCaracteristicasMascotas.enqueue(new Callback<caracteristicaMascota>(){
 
             @Override
@@ -359,12 +407,12 @@ public class CrearPerfilMascotaActivity extends AppCompatActivity {
             }
 
 
-         @Override
-         public void onFailure(Call<caracteristicaMascota> call, Throwable t) {
-                            Log.e("mascota2",""+t.getMessage());
+            @Override
+            public void onFailure(Call<caracteristicaMascota> call, Throwable t) {
+                Log.e("mascota2",""+t.getMessage());
 
-                        }
-                    });
-
-                }
             }
+        });
+
+    }
+}
