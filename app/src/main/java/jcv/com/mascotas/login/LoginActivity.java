@@ -63,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                         , Toast.LENGTH_LONG).show();
                 Intent iniciarsession = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(iniciarsession);
+                finish();
 
 
             }
@@ -77,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onError(FacebookException exception) {
                 Log.d("iniciofb", "Error");
-                Toast.makeText(getApplicationContext(),"Error", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Error, al parecer no hay internet", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -121,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString("email_usuario", "modificado@email.com");
                             editor.commit();
                         }else{
-                            Toast.makeText(getApplicationContext(), "error" , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Usuario o contraseña incorrecta" , Toast.LENGTH_SHORT).show();
                         }
                     }
 
