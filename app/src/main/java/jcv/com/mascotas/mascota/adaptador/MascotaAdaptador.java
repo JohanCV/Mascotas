@@ -35,7 +35,7 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.VHMa
     @Override
     public void onBindViewHolder(@NonNull VHMascota holder, int position) {
         holder.nombre.setText(listMascotas.get(position).getNombre());
-        holder.raza.setText(listMascotas.get(position).getRaza());
+        holder.raza.setText(String.valueOf(listMascotas.get(position).getRaza()));
         holder.observacion.setText(listMascotas.get(position).getObservaciones());
     }
 

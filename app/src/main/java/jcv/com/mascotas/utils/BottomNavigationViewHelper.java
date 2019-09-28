@@ -47,6 +47,7 @@ public class BottomNavigationViewHelper {
                         Intent intent_perfil = new Intent(context, PerfilActivity.class);
                         context.startActivity(intent_perfil);
                         break;
+
                 }
 
                 return false;

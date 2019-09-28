@@ -4,8 +4,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.loader.content.CursorLoader;
+import io.github.wangeason.multiphotopicker.utils.PhotoPickerIntent;
 import jcv.com.mascotas.R;
 import jcv.com.mascotas.login.LoginActivity;
+import jcv.com.mascotas.mascota.MascotaActivity;
 import jcv.com.mascotas.modelo.Mascota;
 import jcv.com.mascotas.modelo.Publicacion;
 import jcv.com.mascotas.servicios.ServicioMascota;
@@ -41,6 +43,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -51,16 +54,20 @@ import java.util.List;
 import static jcv.com.mascotas.servicios.ServicioPublicacion.url;
 
 public class CrearPublicacionActivity extends AppCompatActivity {
+    private ImageView regresar;
+    private TextView nombreCabecera;
     private CheckBox chk_recompensa;
     private EditText txt_recompensa;
     private EditText txt_Fecha_perdida;
     private static final String CERO = "0";
     private static final String BARRA = "-";
-    public final Calendar c = Calendar.getInstance();
-    final int mes = c.get(Calendar.MONTH);
-    final int dia = c.get(Calendar.DAY_OF_MONTH);
-    final int anio = c.get(Calendar.YEAR);
+    //Calendario
+    private  Calendar calendar;
+    private int mes;
+    private int dia;
+    private int anio;
     private ImageButton ib_ObtenerFecha;
+
     private Button btn_publicar;
     private Spinner spinner;
     private ImageView mapa;
@@ -69,6 +76,11 @@ public class CrearPublicacionActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     Uri selectedImage;
     List<Mascota> mascotas;
+    private Bundle datosmapa;
+    private Double latitud,longitud;
+
+    public CrearPublicacionActivity() {
+    }
 
 
     @Override
@@ -81,6 +93,8 @@ public class CrearPublicacionActivity extends AppCompatActivity {
     }
 
     private void findElemente() {
+        regresar =(ImageView) findViewById(R.id.regresarPerfilEditar);
+        nombreCabecera = (TextView) findViewById(R.id.perfilUsuarioNombreEditar);
         ib_ObtenerFecha = (ImageButton) findViewById(R.id.ib_obtener_fecha);
         chk_recompensa = (CheckBox) findViewById(R.id.chk_recompensa);
         txt_recompensa = (EditText) findViewById(R.id.txt_recompensa);
@@ -94,8 +108,20 @@ public class CrearPublicacionActivity extends AppCompatActivity {
     }
 
     private void eventos() {
-        Listar_mascota_usuario();
+
+        regresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent regresarHome = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(regresarHome);
+            }
+        });
+
+        nombreCabecera.setText("Crear Mi Publicación");
         habilitar_recompensa();
+        Listar_mascota_usuario();
+
+
         ib_ObtenerFecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,10 +132,12 @@ public class CrearPublicacionActivity extends AppCompatActivity {
         btn_publicar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Crear_publicacion();
-                SubirFoto();
+
+                Crear_publicacion();
+
             }
         });
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -126,7 +154,7 @@ public class CrearPublicacionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentmapa = new Intent(getApplicationContext(), MapaActivity.class);
-                startActivity(intentmapa);
+                startActivityForResult(intentmapa,2);
             }
         });
 
@@ -135,10 +163,10 @@ public class CrearPublicacionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(
                         CrearPublicacionActivity.this);
-                myAlertDialog.setTitle("Upload Pictures Option");
-                myAlertDialog.setMessage("How do you want to set your picture?");
+                myAlertDialog.setTitle("Subir fotos");
+                //myAlertDialog.setMessage("¿Cómo quieres configurar tu imagen?");
 
-                myAlertDialog.setPositiveButton("Gallery",
+                myAlertDialog.setPositiveButton("Galería",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface arg0, int arg1) {
                                 Intent intent=new Intent(Intent.ACTION_PICK);
@@ -149,11 +177,10 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                                 intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
                                 // Launching the Intent
                                 startActivityForResult(intent,1);
-
                             }
                         });
 
-                myAlertDialog.setNegativeButton("Camera",
+                /*myAlertDialog.setNegativeButton("Camera",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface arg0, int arg1) {
 
@@ -161,11 +188,9 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                                 if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                                     startActivityForResult(takePictureIntent, 2);
                                 }
-
                             }
-                        });
+                        });*/
                 myAlertDialog.show();
-
             }
         });
     }
@@ -182,20 +207,19 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                 Double.parseDouble(txt_recompensa.getText().toString()),
                 txt_Fecha_perdida.getText().toString(),
                 mascotas.get(posicion).getId(),
-                1.0,
-                1.0);
+                latitud,
+                longitud);
         registrar_publicacion.enqueue(new Callback<Publicacion>() {
             @Override
             public void onResponse(Call<Publicacion> call, Response<Publicacion> response) {
                 switch (response.code()) {
-                    case 200:
+                    case 201:
                         Publicacion p = response.body();
                         Log.e("publicar", "" + p.getRecompensa());
-
+                        SubirFoto();
                         break;
                     default:
                         Log.e("errorp", "" + response.code());
-
                 }
             }
 
@@ -207,28 +231,34 @@ public class CrearPublicacionActivity extends AppCompatActivity {
     }
 
     private void obtenerFecha() {
+        calendar = Calendar.getInstance();
+        anio = calendar.get(Calendar.YEAR);
+        mes = calendar.get(Calendar.MONTH);
+        dia = calendar.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog recogerFecha = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker view, int dayOfMonth, int month, int year) {
-                //Esta variable lo que realiza es aumentar en uno el mes ya que comienza desde 0 = enero
-                final int mesActual = month + 1;
+            public void onDateSet(DatePicker view, int dia, int mes, int anio) {
+               //Esta variable lo que realiza es aumentar en uno el mes ya que comienza desde 0 = enero
+                /*final int mesActual = mes + 1;
                 //Formateo el día obtenido: antepone el 0 si son menores de 10
-                String diaFormateado = (dayOfMonth < 10) ? CERO + String.valueOf(dayOfMonth) : String.valueOf(dayOfMonth);
+                String diaFormateado = (dia < 10) ? CERO + String.valueOf(dia) : String.valueOf(dia);
                 //Formateo el mes obtenido: antepone el 0 si son menores de 10
                 String mesFormateado = (mesActual < 10) ? CERO + String.valueOf(mesActual) : String.valueOf(mesActual);
                 //Muestro la fecha con el formato deseado
-                txt_Fecha_perdida.setText(diaFormateado + BARRA + mesFormateado + BARRA + year);
+
+                txt_Fecha_perdida.setText(diaFormateado + BARRA + mesFormateado + BARRA + anio);*/
+                txt_Fecha_perdida.setText(dia+"/"+(mes+1)+"/"+anio);
 
             }
             //Estos valores deben ir en ese orden, de lo contrario no mostrara la fecha actual
             /**
              *También puede cargar los valores que usted desee
              */
-        }, dia, mes, anio);
+        }, anio,mes,dia);
         //Muestro el widget
+        recogerFecha.getDatePicker().setMaxDate(System.currentTimeMillis());
         recogerFecha.show();
-
     }
 
     private void Listar_mascota_usuario() {
@@ -236,8 +266,8 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        ServicioPublicacion Ssrviciopublicacion = retrofit.create(ServicioPublicacion.class);
-        Call<List<Mascota>> call = Ssrviciopublicacion.listar_mascocas_usuario(4);
+        ServicioPublicacion serviciopublicacion = retrofit.create(ServicioPublicacion.class);
+        Call<List<Mascota>> call = serviciopublicacion.listar_mascotas_usuario(4);
         call.enqueue(new Callback<List<Mascota>>() {
             @Override
             public void onResponse(Call<List<Mascota>> call, Response<List<Mascota>> response) {
@@ -251,11 +281,9 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                             Log.e("app", p.getNombre() + "");
                             perros.add(p.getNombre());
                         }
-
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_spinner_escoger_mascota, perros);
                         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                         spinner.setAdapter(adapter);
-
                         break;
                 }
             }
@@ -266,7 +294,16 @@ public class CrearPublicacionActivity extends AppCompatActivity {
             }
         });
     }
-
+public void MultiPhoto(){
+    PhotoPickerIntent intent = new PhotoPickerIntent(CrearPublicacionActivity.this);
+    intent.setPhotoCount(3);
+    intent.setShowCamera(true);
+    intent.setShowGif(true);
+    intent.setMultiChoose(true);
+    //https://github.com/wangeason/MultiPhotoPicker
+    //https://github.com/nileshpambhar/MultiPhotoPicker
+    //startActivityForResult(intent, REQUEST_CODE);
+}
     public void SubirFoto(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
@@ -275,11 +312,9 @@ public class CrearPublicacionActivity extends AppCompatActivity {
         ServicioMascota Serviciopublicacion = retrofit.create(ServicioMascota.class);
         File file = new File(getRealPathFromURI(selectedImage));
 
-
         RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("foto",file.getName(),reqFile);
         RequestBody mascota = RequestBody.create(MediaType.parse("text/plain"),"1");
-
 
         //
         Call<ResponseBody> call = Serviciopublicacion.subirFotoMascota( body,  mascota);
@@ -289,12 +324,11 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                 Log.e("Codigo ", response.code() + "");
                 Log.e("Codigo ", response.body().toString() + "");
                 switch (response.code()) {
-                    case 200:
+                    case 201:
                         Log.e("Foto Firulais", "Siii lo logre");
                         break;
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("Error Appatas", t.getMessage());
@@ -310,7 +344,7 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                 //is chkIos checked?
                 if (((CheckBox) v).isChecked()) {
                     txt_recompensa.setEnabled(true);
-                    txt_recompensa.findFocus();
+                    txt_recompensa.requestFocus();
                 } else {
                     txt_recompensa.setEnabled(false);
                     txt_recompensa.setText("");
@@ -326,6 +360,15 @@ public class CrearPublicacionActivity extends AppCompatActivity {
             selectedImage = data.getData();
             fotos.setImageURI(selectedImage);
         }
+        if (requestCode == 2) {
+            if(resultCode == MapaActivity.RESULT_OK){
+                latitud=data.getDoubleExtra("latitud",0);
+                longitud=data.getDoubleExtra("longitud", 0);
+            }
+            if (resultCode == MapaActivity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
     }
     private String getRealPathFromURI(Uri contentUri) {
         String[] proj = {MediaStore.Images.Media.DATA};
@@ -337,4 +380,5 @@ public class CrearPublicacionActivity extends AppCompatActivity {
         cursor.close();
         return result;
     }
+
 }

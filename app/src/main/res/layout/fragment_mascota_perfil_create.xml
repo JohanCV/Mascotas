@@ -26,7 +26,7 @@
                 android:text="Nombre de Mascota:" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/txt_nombremascota"
                 android:layout_width="match_parent"
                 android:layout_height="58dp"
                 android:ems="10"
@@ -40,7 +40,7 @@
                 android:text="Raza:" />
 
             <EditText
-                android:id="@+id/editText3"
+                android:id="@+id/txt_razamascota"
                 android:layout_width="match_parent"
                 android:layout_height="82dp"
                 android:ems="10"
@@ -73,12 +73,13 @@
                 android:orientation="horizontal">
 
                 <Spinner
+                    android:id="@+id/spinner_edad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
                 <Spinner
-                    android:id="@+id/spinner4"
+                    android:id="@+id/spinner_peso"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -110,16 +111,44 @@
                 android:orientation="horizontal">
 
                 <Spinner
-                    android:id="@+id/spinner5"
+                    android:id="@+id/spinner_tamano"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
                 <Spinner
-                    android:id="@+id/spinner6"
+                    android:id="@+id/spinner_color"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="31dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView28"
+                    android:layout_width="37dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Sexo:" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spinner_sexo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+
             </LinearLayout>
 
             <TextView
@@ -129,7 +158,7 @@
                 android:text="Accesorios:" />
 
             <EditText
-                android:id="@+id/editText4"
+                android:id="@+id/txt_accesoriosmascota"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -143,7 +172,7 @@
                 android:text="Enfermedad:" />
 
             <EditText
-                android:id="@+id/editText5"
+                android:id="@+id/txt_enfermedadmascota"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -156,28 +185,36 @@
                 android:layout_height="40dp"
                 android:text="Foto:" />
 
+            <ImageButton
+                android:id="@+id/boton_camara"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/ic_menu_camera" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageButton
+                    android:id="@+id/foto_mascota"
+                    android:layout_width="88dp"
+                    android:layout_height="92dp"
                     android:layout_weight="1"
                     tools:srcCompat="@tools:sample/avatars[2]" />
 
                 <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="186dp"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/imagen_mascota"
+                    android:layout_width="203dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     tools:srcCompat="@tools:sample/avatars[2]" />
+
+
             </LinearLayout>
 
             <Button
-                android:id="@+id/btnSave"
+                android:id="@+id/btn_guardarmascota"
                 android:layout_width="280dp"
                 android:layout_height="38dp"
                 android:layout_marginStart="8dp"

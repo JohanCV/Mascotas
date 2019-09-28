@@ -21,7 +21,7 @@ public interface ServicioPublicacion {
 
 
     @GET ("/appatas/mascotas/{usuario}/")
-    Call<List<Mascota>>listar_mascocas_usuario(@Path("usuario") int usuario);
+    Call<List<Mascota>>listar_mascotas_usuario(@Path("usuario") int usuario);
 
 
     @POST("/appatas/publicacion/")

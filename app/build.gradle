@@ -48,4 +48,5 @@ dependencies {
 
     //glide
     implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'io.github.wangeason:MultiPhotoPicker:0.2.0'
 }

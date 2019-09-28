@@ -17,7 +17,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/regresarPerfilEditar"
+                    android:id="@+id/regresarHome"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_centerVertical="true"
@@ -27,14 +27,14 @@
                     android:foregroundGravity="center"
                     android:src="@drawable/ic_action_regresar" />
                 <TextView
-                    android:id="@+id/perfilUsuarioNombreEditar"
+                    android:id="@+id/perfilNombrePublicacion"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Edición del Perfil"
+                    android:text="Crear mi Publicacion"
                     android:textColor="@color/colorBlack"
                     android:textSize="20dp" />
             </LinearLayout>

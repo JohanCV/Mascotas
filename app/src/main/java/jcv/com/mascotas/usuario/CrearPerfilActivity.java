@@ -652,7 +652,7 @@ public class CrearPerfilActivity extends AppCompatActivity {
     private void findElemente() {
         regresar = findViewById(R.id.regresarPerfilEditar);
         nombreCabecera = findViewById(R.id.perfilUsuarioNombreEditar);
-        btnSave = findViewById(R.id.btnSave);
+        btnSave = findViewById(R.id.btn_guardarmascota);
         nombre = findViewById(R.id.Nombre);
         apellido = findViewById(R.id.Apellido);
         Email = findViewById(R.id.Email);
@@ -663,7 +663,6 @@ public class CrearPerfilActivity extends AppCompatActivity {
 
         Fotoperfil = findViewById(R.id.FotoPerfil);
         SubirFoto = findViewById((R.id.SubirFoto));
-
 
         //Aqui arranca y carga los departamentos
         departamento = (Spinner) findViewById(R.id.departamento);
