@@ -1,8 +1,10 @@
 package jcv.com.mascotas.mascota;
 
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -57,9 +60,10 @@ public class CrearPerfilMascotaActivity extends AppCompatActivity {
     private EditText txt_accesoriosmascota;
     private EditText txt_enfermedadesmascota;
     private ImageButton foto_mascota;
-    private ImageView imagen_mascota;
+    //private ImageView imagen_mascota;
     private Button btn_guardarmascota;
     private ImageButton boton_camara;
+    LinearLayout contenedor;
 
     String sexo = "M";
     String edad = "cachorro";
@@ -82,7 +86,7 @@ public class CrearPerfilMascotaActivity extends AppCompatActivity {
         txt_razamascota = findViewById(R.id.txt_razamascota);
         txt_accesoriosmascota = findViewById(R.id.txt_accesoriosmascota);
         foto_mascota = findViewById(R.id.foto_mascota);
-        imagen_mascota = findViewById(R.id.imagen_mascota);
+        //imagen_mascota = findViewById(R.id.imagen_mascota);
         boton_camara = findViewById(R.id.boton_camara);
         spinner_edad = findViewById(R.id.spinner_edad);
         ArrayAdapter<CharSequence> adapter_edad = ArrayAdapter.createFromResource(this,
@@ -115,6 +119,7 @@ public class CrearPerfilMascotaActivity extends AppCompatActivity {
         spinner_sexo.setAdapter(adapter_sexo);
 
         btn_guardarmascota = findViewById(R.id.btn_guardarmascota);
+        contenedor = findViewById(R.id.contenedorFotos);
     }
 
     private void event() {
@@ -332,7 +337,10 @@ public class CrearPerfilMascotaActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1 && resultCode == RESULT_OK){
             Bitmap bm = data.getParcelableExtra("data");
-            imagen_mascota.setImageBitmap(bm);
+            foto_mascota.setImageBitmap(bm);
+            ImageButton im = new ImageButton(CrearPerfilMascotaActivity.this);
+            contenedor.addView(im);
+
         }
     }
 
@@ -342,8 +350,12 @@ public class CrearPerfilMascotaActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ServicioMascota servicioMascota = retrofit.create(ServicioMascota.class);
+        SharedPreferences prefs =
+                getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
 
-        Call<Mascota> registrarMascota = servicioMascota.registrarMascota(txt_nombremascota.getText().toString(),txt_accesoriosmascota.getText().toString(),sexo,4,1);
+        int codigo = prefs.getInt("id", 0);
+
+        Call<Mascota> registrarMascota = servicioMascota.registrarMascota(txt_nombremascota.getText().toString(),txt_accesoriosmascota.getText().toString(),sexo,codigo,1);
         registrarMascota.enqueue(new Callback<Mascota>() {
             @Override
             public void onResponse(Call<Mascota> call, Response<Mascota> response) {
