@@ -8,7 +8,10 @@ public class Mascota {
     String sexo;
     String observaciones;
     int raza;
-    List<FotoMascota>fotomascota;
+    List<FotoMascota>fotos_mascota;
+
+    public Mascota() {
+    }
 
     public Mascota(int id, String nombre, String sexo, String observaciones, int raza, List<FotoMascota> fotomascota) {
         this.id = id;
@@ -16,7 +19,7 @@ public class Mascota {
         this.sexo = sexo;
         this.observaciones = observaciones;
         this.raza = raza;
-        this.fotomascota = fotomascota;
+        this.fotos_mascota = fotomascota;
     }
 
     public int getId() {
@@ -60,10 +63,10 @@ public class Mascota {
     }
 
     public List<FotoMascota> getFotomascota() {
-        return fotomascota;
+        return fotos_mascota;
     }
 
     public void setFotomascota(List<FotoMascota> fotomascota) {
-        this.fotomascota = fotomascota;
+        this.fotos_mascota = fotomascota;
     }
 }

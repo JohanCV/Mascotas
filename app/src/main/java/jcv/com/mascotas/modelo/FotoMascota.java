@@ -3,6 +3,9 @@ package jcv.com.mascotas.modelo;
 public class FotoMascota {
     String foto;
 
+    public FotoMascota() {
+    }
+
     public FotoMascota(String foto) {
         this.foto = foto;
     }

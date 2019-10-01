@@ -1,13 +1,17 @@
 package jcv.com.mascotas.mascota.adaptador;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -37,6 +41,13 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.VHMa
         holder.nombre.setText(listMascotas.get(position).getNombre());
         holder.raza.setText(String.valueOf(listMascotas.get(position).getRaza()));
         holder.observacion.setText(listMascotas.get(position).getObservaciones());
+        if(listMascotas.get(position).getFotomascota() != null) {
+//            Log.e("ErrorMascota", listMascotas.get(position).getFotomascota().get(0).getFoto() );
+            if(listMascotas.get(position).getFotomascota().size() >0)
+            Glide.with(context).load(listMascotas.get(position).getFotomascota().get(0).getFoto()).into(holder.foto);
+        }
+        //holder.foto.setImageBitmap(listMascotas.get(position).getFotomascota());
+
     }
 
     @Override
@@ -56,6 +67,7 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.VHMa
     public class VHMascota extends RecyclerView.ViewHolder{
 
         TextView nombre, raza, observacion;
+        ImageView foto;
 
         public VHMascota(@NonNull View itemView) {
             super(itemView);
@@ -63,6 +75,9 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.VHMa
             nombre = (TextView) itemView.findViewById(R.id.txtNombreMascotaPerfilInput);
             raza = (TextView) itemView.findViewById(R.id.txtRazaMascotaPerfilInput);
             observacion = (TextView) itemView.findViewById(R.id.txtObservacionesMAscotaPerfilInput);
+            foto=(ImageView)itemView.findViewById(R.id.imgMascotaperfil);
+
+
         }
     }
 }
