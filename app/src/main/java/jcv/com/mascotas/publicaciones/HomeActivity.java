@@ -12,6 +12,9 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import jcv.com.mascotas.R;
 import jcv.com.mascotas.publicaciones.adaptador.SectionsPageAdapter;
 import jcv.com.mascotas.utils.BottomNavigationViewHelper;
@@ -25,6 +28,7 @@ public class HomeActivity extends AppCompatActivity {
     private BottomNavigationViewHelper bottomNavigationViewHelper;
     private ViewPager viewPager;
     private TabLayout tabLayout;
+    private Calendar c1 = GregorianCalendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

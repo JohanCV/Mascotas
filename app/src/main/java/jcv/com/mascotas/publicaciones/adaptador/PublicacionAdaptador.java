@@ -15,6 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.sql.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import jcv.com.mascotas.R;
@@ -63,6 +66,7 @@ public class PublicacionAdaptador extends RecyclerView.Adapter<PublicacionAdapta
 
                     Toast.makeText(mAdapter_Publicacion.context,nombreMascota.getText(),Toast.LENGTH_LONG).show();
                     Intent irdetalle = new Intent(context, DetallePublicacionActivity.class);
+                    //irdetalle.putExtra("id_publicacion",listPublicacion.get(getPosition().get))
                     context.startActivity(irdetalle);
                 }
             });
@@ -79,6 +83,8 @@ public class PublicacionAdaptador extends RecyclerView.Adapter<PublicacionAdapta
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderPublicacion viewHolderPublicacion, int position) {
+        Calendar c1 = GregorianCalendar.getInstance();
+
 
         viewHolderPublicacion.fechaPublicacion.setText(listPublicacion.get(position).getFecha_perdida().toString());
         viewHolderPublicacion.nombreMascota.setText(listPublicacion.get(position).getMascota().getNombre());
