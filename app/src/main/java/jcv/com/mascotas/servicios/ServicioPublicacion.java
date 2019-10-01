@@ -32,6 +32,14 @@ public interface ServicioPublicacion {
                                            @Field("latitud_perdida")Double latitud_perdida,
                                            @Field("longitud_perdida")Double longitud_perdida);
 
+    @POST("/appatas/publicacion/")
+    @FormUrlEncoded
+    Call<String>registrar_publicacionStr(@Field("recompensa")Double recompensa,
+                                           @Field("fecha_perdida")String fecha_perdida,
+                                           @Field("mascota")int mascota,
+                                           @Field("latitud_perdida")Double latitud_perdida,
+                                           @Field("longitud_perdida")Double longitud_perdida);
+
     @PUT("/appatas/publicacion/{pk}/")
     @FormUrlEncoded
     Call<Publicacion>actualizar_publicacion(@Path("pk")int pk,

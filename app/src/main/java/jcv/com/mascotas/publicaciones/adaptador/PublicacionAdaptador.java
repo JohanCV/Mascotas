@@ -23,12 +23,13 @@ import java.util.List;
 import jcv.com.mascotas.R;
 import jcv.com.mascotas.modelo.Mascota;
 import jcv.com.mascotas.modelo.Publicacion;
+import jcv.com.mascotas.modelo.PublicacionDetalle;
 import jcv.com.mascotas.publicaciones.DetallePublicacionActivity;
 import jcv.com.mascotas.publicaciones.HomeActivity;
 import jcv.com.mascotas.publicaciones.HomeFragment;
 
 public class PublicacionAdaptador extends RecyclerView.Adapter<PublicacionAdaptador.ViewHolderPublicacion> {
-    private List<Publicacion> listPublicacion;
+    private List<PublicacionDetalle> listPublicaciondetalle;
     private LayoutInflater mInflater;
     private Context context;
 
@@ -36,7 +37,7 @@ public class PublicacionAdaptador extends RecyclerView.Adapter<PublicacionAdapta
 
     public PublicacionAdaptador(Context context, List<Publicacion> listPublicacion){
         this.context = context;
-        this.listPublicacion = listPublicacion;
+        this.listPublicaciondetalle = listPublicaciondetalle;
         mInflater=LayoutInflater.from(context);
     }
     public class ViewHolderPublicacion extends RecyclerView.ViewHolder {
@@ -86,16 +87,19 @@ public class PublicacionAdaptador extends RecyclerView.Adapter<PublicacionAdapta
         Calendar c1 = GregorianCalendar.getInstance();
 
 
-        viewHolderPublicacion.fechaPublicacion.setText(listPublicacion.get(position).getFecha_perdida().toString());
-        viewHolderPublicacion.nombreMascota.setText(listPublicacion.get(position).getMascota().getNombre());
-        viewHolderPublicacion.dondeMascota.setText(listPublicacion.get(position).getLatitud_perdida().toString());
-        viewHolderPublicacion.recompensaMascota.setText(listPublicacion.get(position).getRecompensa().toString());
-//        Glide.with(context).load(listPublicacion.get(position).getMascota().getFotomascota().get(1));
-
+        viewHolderPublicacion.fechaPublicacion.setText(listPublicaciondetalle.get(position).getFecha_perdida().toString());
+        viewHolderPublicacion.nombreMascota.setText(listPublicaciondetalle.get(position).getMascotas().getNombre());
+        viewHolderPublicacion.dondeMascota.setText(listPublicaciondetalle.get(position).getLatitud_perdida().toString());
+        viewHolderPublicacion.recompensaMascota.setText(listPublicaciondetalle.get(position).getRecompensa().toString());
+        if(listPublicaciondetalle.get(position).getMascotas().getFotomascota()!=null){
+            if (listPublicaciondetalle.get(position).getMascotas().getFotomascota().size()>0){
+                Glide.with(context).load(listPublicaciondetalle.get(position).getMascotas().getFotomascota().get(0)).into(viewHolderPublicacion.imgMascota);
+            }
+        }
        }
 
     @Override
     public int getItemCount() {
-        return listPublicacion.size();
+        return listPublicaciondetalle.size();
     }
 }

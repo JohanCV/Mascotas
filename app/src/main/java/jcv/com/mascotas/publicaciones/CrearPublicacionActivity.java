@@ -22,6 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
@@ -120,24 +121,18 @@ public class CrearPublicacionActivity extends AppCompatActivity {
         nombreCabecera.setText("Crear Mi Publicación");
         habilitar_recompensa();
         Listar_mascota_usuario();
-
-
         ib_ObtenerFecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 obtenerFecha();
             }
         });
-
         btn_publicar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Crear_publicacion();
-
             }
         });
-
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -158,7 +153,7 @@ public class CrearPublicacionActivity extends AppCompatActivity {
             }
         });
 
-        fotos.setOnClickListener(new View.OnClickListener() {
+       fotos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(
@@ -180,7 +175,7 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                             }
                         });
 
-                /*myAlertDialog.setNegativeButton("Camera",
+                myAlertDialog.setNegativeButton("Camera",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface arg0, int arg1) {
 
@@ -189,7 +184,7 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                                     startActivityForResult(takePictureIntent, 2);
                                 }
                             }
-                        });*/
+                        });
                 myAlertDialog.show();
             }
         });
@@ -200,15 +195,28 @@ public class CrearPublicacionActivity extends AppCompatActivity {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
         ServicioPublicacion serviciopublicacion = retrofit.create(ServicioPublicacion.class);
 
         Call<Publicacion> registrar_publicacion = serviciopublicacion.registrar_publicacion(
                 Double.parseDouble(txt_recompensa.getText().toString()),
-                txt_Fecha_perdida.getText().toString(),
+        "1994-01-01",
                 mascotas.get(posicion).getId(),
                 latitud,
                 longitud);
+     /*   registrar_publicacion.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.e("CrearMascota", "" + response.body());
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e("CrearMascota", "" + t.getMessage());
+            }
+        });*/
+
         registrar_publicacion.enqueue(new Callback<Publicacion>() {
             @Override
             public void onResponse(Call<Publicacion> call, Response<Publicacion> response) {
@@ -216,15 +224,24 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                     case 201:
                         Publicacion p = response.body();
                         Log.e("publicar", "" + p.getRecompensa());
-                        SubirFoto();
+                        //SubirFoto();
                         break;
                     default:
-                        Log.e("errorp", "" + response.code());
+                        Publicacion datos = response.body();
+                        Log.e("errorp", "" + response.toString());
+
+                        Log.e("MAscota",""+mascotas.get(posicion).getId());
+                        Log.e("Fecha",""+ txt_Fecha_perdida.getText());
+                        Log.e("Recompensa",""+ txt_recompensa.getText());
+                        Log.e("Latitud",""+ latitud);
+                        Log.e("Longitud",""+ longitud);
+                        Log.e("foto",""+ fotos);
                 }
             }
 
             @Override
             public void onFailure(Call<Publicacion> call, Throwable t) {
+                //Log.e("Error publicacion",call. );
                 Log.e("Error publicacion", t.getMessage());
             }
         });
@@ -248,7 +265,7 @@ public class CrearPublicacionActivity extends AppCompatActivity {
                 //Muestro la fecha con el formato deseado
 
                 txt_Fecha_perdida.setText(diaFormateado + BARRA + mesFormateado + BARRA + anio);*/
-                txt_Fecha_perdida.setText(dia+"/"+(mes+1)+"/"+anio);
+                txt_Fecha_perdida.setText(anio+"/"+(mes+1)+"/"+dia);
 
             }
             //Estos valores deben ir en ese orden, de lo contrario no mostrara la fecha actual
