@@ -45,9 +45,13 @@ public class DetallePublicacionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_publicacion);
+
         findElemente();
         eventos();
+        Intent i=getIntent();
+        int  codigo_mascota=i.getIntExtra("id_mascota",0);
 
+        Toast.makeText(getApplicationContext(),codigo_mascota+"",Toast.LENGTH_LONG).show();
     }
     private void findElemente() {
         regresar =(ImageView) findViewById(R.id.regresarPerfilEditar);

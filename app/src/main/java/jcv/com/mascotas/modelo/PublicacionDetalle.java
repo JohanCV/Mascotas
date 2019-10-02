@@ -9,17 +9,17 @@ public class PublicacionDetalle {
     Date fecha_perdida;
     Double latitud_perdida;
     Double longitud_perdida;
-    Mascota mascotas;
+    Mascota mascota;
     String estado;
 
-    public PublicacionDetalle(int idpublicacion, Date fecha_publicacion, Double recompensa, Date fecha_perdida, Double latitud_perdida, Double longitud_perdida, Mascota mascotas, String estado) {
+    public PublicacionDetalle(int idpublicacion, Date fecha_publicacion, Double recompensa, Date fecha_perdida, Double latitud_perdida, Double longitud_perdida, Mascota mascota, String estado) {
         this.idpublicacion = idpublicacion;
         this.fecha_publicacion = fecha_publicacion;
         this.recompensa = recompensa;
         this.fecha_perdida = fecha_perdida;
         this.latitud_perdida = latitud_perdida;
         this.longitud_perdida = longitud_perdida;
-        this.mascotas = mascotas;
+        this.mascota = mascota;
         this.estado = estado;
     }
 
@@ -71,12 +71,12 @@ public class PublicacionDetalle {
         this.longitud_perdida = longitud_perdida;
     }
 
-    public Mascota getMascotas() {
-        return mascotas;
+    public Mascota getMascota() {
+        return mascota;
     }
 
-    public void setMascotas(Mascota mascotas) {
-        this.mascotas = mascotas;
+    public void setMascota(Mascota mascota) {
+        this.mascota = mascota;
     }
 
     public String getEstado() {

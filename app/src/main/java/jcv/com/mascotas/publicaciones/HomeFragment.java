@@ -20,6 +20,7 @@ import java.util.List;
 
 import jcv.com.mascotas.R;
 import jcv.com.mascotas.mascota.CrearPerfilMascotaActivity;
+import jcv.com.mascotas.modelo.PublicacionDetalle;
 import jcv.com.mascotas.publicaciones.adaptador.PublicacionAdaptador;
 import jcv.com.mascotas.modelo.Publicacion;
 import jcv.com.mascotas.servicios.ServicioPublicacion;
@@ -33,7 +34,7 @@ public class HomeFragment extends Fragment {
     public static String url = "http://proyectosmovil.pythonanywhere.com";
     private RecyclerView recyclerView;
     private PublicacionAdaptador publicacionAdaptador;
-    private List<Publicacion> listPublish = new ArrayList<>();
+    private List<PublicacionDetalle> listPublish = new ArrayList<>();
     private FloatingActionButton floatingActionButton;
 
     @Nullable
@@ -62,17 +63,17 @@ public class HomeFragment extends Fragment {
                 .build();
 
         ServicioPublicacion servicioPublicacion =retrofit.create(ServicioPublicacion.class);
-        Call<List<Publicacion>> call =servicioPublicacion.listarPublicacion();
+        Call<List<PublicacionDetalle>> call =servicioPublicacion.listarPublicacion();
 
-        call.enqueue(new Callback<List<Publicacion>>() {
+        call.enqueue(new Callback<List<PublicacionDetalle>>() {
             @Override
-            public void onResponse(Call<List<Publicacion>> call, Response<List<Publicacion>> response) {
+            public void onResponse(Call<List<PublicacionDetalle>> call, Response<List<PublicacionDetalle>> response) {
                 switch (response.code()){
                     case 200:
-                        List<Publicacion> publicaciones = response.body();
+                        List<PublicacionDetalle> publicaciones = response.body();
                         publicacionAdaptador = new PublicacionAdaptador(getContext(),publicaciones);
                         recyclerView.setAdapter(publicacionAdaptador);
-                        for(Publicacion p : publicaciones){
+                        for(PublicacionDetalle p : publicaciones){
                             Log.d("mascota", p.getRecompensa()+"");
                             Log.d("mascota", p.getFecha_perdida()+"");
                             Log.d("mascota", p.getLatitud_perdida()+"");
@@ -83,8 +84,7 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<Publicacion>> call, Throwable t) {
-
+            public void onFailure(Call<List<PublicacionDetalle>> call, Throwable t) {
             }
         });
     }

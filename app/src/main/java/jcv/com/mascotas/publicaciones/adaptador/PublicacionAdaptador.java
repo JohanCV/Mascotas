@@ -2,6 +2,7 @@ package jcv.com.mascotas.publicaciones.adaptador;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,9 +34,7 @@ public class PublicacionAdaptador extends RecyclerView.Adapter<PublicacionAdapta
     private LayoutInflater mInflater;
     private Context context;
 
-
-
-    public PublicacionAdaptador(Context context, List<Publicacion> listPublicacion){
+    public PublicacionAdaptador(Context context, List<PublicacionDetalle> listPublicaciondetalle){
         this.context = context;
         this.listPublicaciondetalle = listPublicaciondetalle;
         mInflater=LayoutInflater.from(context);
@@ -46,10 +45,12 @@ public class PublicacionAdaptador extends RecyclerView.Adapter<PublicacionAdapta
         TextView  dondeMascota, recompensaMascota;
         ImageView  imgMascota;
         CardView card;
+        int codigo;
         PublicacionAdaptador mAdapter_Publicacion;
 
         public ViewHolderPublicacion(@NonNull View itemView,final PublicacionAdaptador adapter) {
             super(itemView);
+
             nombreMascota = itemView.findViewById(R.id.lblNombreMascota);
             fechaPublicacion = itemView.findViewById(R.id.lblFechaPublicacion);
             horaPublicacion =itemView.findViewById(R.id.lblHoraPublicacion);
@@ -64,10 +65,9 @@ public class PublicacionAdaptador extends RecyclerView.Adapter<PublicacionAdapta
             card.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-                    Toast.makeText(mAdapter_Publicacion.context,nombreMascota.getText(),Toast.LENGTH_LONG).show();
+                    //Toast.makeText(mAdapter_Publicacion.context,nombreMascota.getText(),Toast.LENGTH_LONG).show();
                     Intent irdetalle = new Intent(context, DetallePublicacionActivity.class);
-                    //irdetalle.putExtra("id_publicacion",listPublicacion.get(getPosition().get))
+                    irdetalle.putExtra("id_mascota",codigo);
                     context.startActivity(irdetalle);
                 }
             });
@@ -85,17 +85,22 @@ public class PublicacionAdaptador extends RecyclerView.Adapter<PublicacionAdapta
     @Override
     public void onBindViewHolder(@NonNull ViewHolderPublicacion viewHolderPublicacion, int position) {
         Calendar c1 = GregorianCalendar.getInstance();
-
-
         viewHolderPublicacion.fechaPublicacion.setText(listPublicaciondetalle.get(position).getFecha_perdida().toString());
-        viewHolderPublicacion.nombreMascota.setText(listPublicaciondetalle.get(position).getMascotas().getNombre());
+        viewHolderPublicacion.nombreMascota.setText(listPublicaciondetalle.get(position).getMascota().getNombre());
         viewHolderPublicacion.dondeMascota.setText(listPublicaciondetalle.get(position).getLatitud_perdida().toString());
         viewHolderPublicacion.recompensaMascota.setText(listPublicaciondetalle.get(position).getRecompensa().toString());
-        if(listPublicaciondetalle.get(position).getMascotas().getFotomascota()!=null){
-            if (listPublicaciondetalle.get(position).getMascotas().getFotomascota().size()>0){
-                Glide.with(context).load(listPublicaciondetalle.get(position).getMascotas().getFotomascota().get(0)).into(viewHolderPublicacion.imgMascota);
+        viewHolderPublicacion.codigo = listPublicaciondetalle.get(position).getIdpublicacion();
+        Log.e("Mascota", listPublicaciondetalle.get(position).getMascota().getId() +"");
+        if(listPublicaciondetalle.get(position).getMascota().getFotomascota()!=null){
+            Log.e("Mascota", "Entro");
+            if (listPublicaciondetalle.get(position).getMascota().getFotomascota().size()>0){
+                Log.e("Mascota", "Salio");
+                Glide.with(context).load(listPublicaciondetalle.get(position).getMascota().getFotomascota().get(1).getFoto()).into(viewHolderPublicacion.imgMascota);
             }
         }
+        //poner el de la publicacion de cada publicacion
+        //servicio de login de willy
+
        }
 
     @Override
