@@ -140,7 +140,7 @@
                     android:text="Nombre:" />
 
                 <TextView
-                    android:id="@+id/textView41"
+                    android:id="@+id/lbl_nombre_mascota"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -163,7 +163,7 @@
                     android:text="Raza:" />
 
                 <TextView
-                    android:id="@+id/textView44"
+                    android:id="@+id/lbl_raza_mascota"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -185,7 +185,7 @@
                     android:text="Edad:" />
 
                 <TextView
-                    android:id="@+id/textView47"
+                    android:id="@+id/lbl_edad_mascota"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -206,7 +206,7 @@
                     android:text="Peso:" />
 
                 <TextView
-                    android:id="@+id/textView49"
+                    android:id="@+id/lbl_peso_mascota"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -227,7 +227,7 @@
                     android:text="Tamaño:" />
 
                 <TextView
-                    android:id="@+id/textView48"
+                    android:id="@+id/lbl_tamanio_mascota"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -248,7 +248,7 @@
                     android:text="Color:" />
 
                 <TextView
-                    android:id="@+id/textView50"
+                    android:id="@+id/lbl_color_mascota"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -269,7 +269,7 @@
                     android:text="Accesorios:" />
 
                 <TextView
-                    android:id="@+id/textView51"
+                    android:id="@+id/lbl_accesorios_mascota"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -290,7 +290,7 @@
                     android:text="Enfermedad:" />
 
                 <TextView
-                    android:id="@+id/textView52"
+                    android:id="@+id/lbl_enfermedad_mascota"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -315,7 +315,7 @@
                     android:text="Nombre:" />
 
                 <TextView
-                    android:id="@+id/textView53"
+                    android:id="@+id/lbl_nombre_usuario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -336,7 +336,7 @@
                     android:text="Sexo:" />
 
                 <TextView
-                    android:id="@+id/textView54"
+                    android:id="@+id/lbl_sexo_usuario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

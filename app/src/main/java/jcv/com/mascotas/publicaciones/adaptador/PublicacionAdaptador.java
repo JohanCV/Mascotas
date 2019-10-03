@@ -89,7 +89,7 @@ public class PublicacionAdaptador extends RecyclerView.Adapter<PublicacionAdapta
         viewHolderPublicacion.nombreMascota.setText(listPublicaciondetalle.get(position).getMascota().getNombre());
         viewHolderPublicacion.dondeMascota.setText(listPublicaciondetalle.get(position).getLatitud_perdida().toString());
         viewHolderPublicacion.recompensaMascota.setText(listPublicaciondetalle.get(position).getRecompensa().toString());
-        viewHolderPublicacion.codigo = listPublicaciondetalle.get(position).getIdpublicacion();
+        viewHolderPublicacion.codigo = listPublicaciondetalle.get(position).getId();
         Log.e("Mascota", listPublicaciondetalle.get(position).getMascota().getId() +"");
         if(listPublicaciondetalle.get(position).getMascota().getFotomascota()!=null){
             Log.e("Mascota", "Entro");

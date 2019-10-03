@@ -20,10 +20,8 @@ public interface ServicioPublicacion {
     @GET("/appatas/publicacion_list/")
     Call<List<PublicacionDetalle>> listarPublicacion();
 
-
     @GET ("/appatas/mascotas/{usuario}/")
     Call<List<Mascota>>listar_mascotas_usuario(@Path("usuario") int usuario);
-
 
     @POST("/appatas/publicacion/")
     @FormUrlEncoded
@@ -49,6 +47,11 @@ public interface ServicioPublicacion {
                                             @Field("mascota")int mascota,
                                             @Field("latitud_perdida")Double latitud_perdida,
                                             @Field("longitud_perdida")Double longitud_perdida);
+
+
+
+    @GET ("/appatas/publicacion_detalle/{id}/")
+    Call<PublicacionDetalle>listar_publicacion_id(@Path("id") int id);
 
 }
     

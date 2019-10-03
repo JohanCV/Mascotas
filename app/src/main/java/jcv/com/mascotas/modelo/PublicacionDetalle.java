@@ -3,7 +3,7 @@ package jcv.com.mascotas.modelo;
 import java.util.Date;
 
 public class PublicacionDetalle {
-    int idpublicacion;
+    int id;
     Date fecha_publicacion;
     Double recompensa;
     Date fecha_perdida;
@@ -12,8 +12,8 @@ public class PublicacionDetalle {
     Mascota mascota;
     String estado;
 
-    public PublicacionDetalle(int idpublicacion, Date fecha_publicacion, Double recompensa, Date fecha_perdida, Double latitud_perdida, Double longitud_perdida, Mascota mascota, String estado) {
-        this.idpublicacion = idpublicacion;
+    public PublicacionDetalle(int id, Date fecha_publicacion, Double recompensa, Date fecha_perdida, Double latitud_perdida, Double longitud_perdida, Mascota mascota, String estado) {
+        this.id = id;
         this.fecha_publicacion = fecha_publicacion;
         this.recompensa = recompensa;
         this.fecha_perdida = fecha_perdida;
@@ -23,12 +23,12 @@ public class PublicacionDetalle {
         this.estado = estado;
     }
 
-    public int getIdpublicacion() {
-        return idpublicacion;
+    public int getId() {
+        return id;
     }
 
-    public void setIdpublicacion(int idpublicacion) {
-        this.idpublicacion = idpublicacion;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Date getFecha_publicacion() {
