@@ -75,6 +75,7 @@ public class DetallePublicacionActivity extends AppCompatActivity {
         codigo_mascota = i.getIntExtra("id_mascota", 0);
 
         Toast.makeText(getApplicationContext(), codigo_mascota + "", Toast.LENGTH_LONG).show();
+        detalle_publicacion();
     }
 
     private void findElemente() {
@@ -103,6 +104,8 @@ public class DetallePublicacionActivity extends AppCompatActivity {
             }
         });
         nombreCabecera.setText("Detalle Publicación");
+
+
 
     }
 
