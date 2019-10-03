@@ -7,11 +7,11 @@
 
     </item>
 
-    <item android:id="@+id/menu_localizado"
+    <!--item android:id="@+id/menu_localizado"
         android:icon="@drawable/ic_menu_localizado"
         android:title="@string/menu_localizado">
 
-    </item>
+    </item-->
 
     <item android:id="@+id/menu_encontrar"
         android:icon="@drawable/ic_menu_encontrar"

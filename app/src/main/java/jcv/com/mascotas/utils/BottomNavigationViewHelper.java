@@ -31,10 +31,10 @@ public class BottomNavigationViewHelper {
                         Intent intent_home = new Intent(context, HomeActivity.class);
                         context.startActivity(intent_home);
                         break;
-                    case R.id.menu_localizado:
+                    /*case R.id.menu_localizado:
                         Intent intent_localizado = new Intent(context, LocalizadoActivity.class);
                         context.startActivity(intent_localizado);
-                        break;
+                        break;*/
                     case R.id.menu_encontrar:
                         Intent intent_encontrar = new Intent(context, EncontrarActivity.class);
                         context.startActivity(intent_encontrar);

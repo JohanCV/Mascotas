@@ -36,7 +36,7 @@ import static jcv.com.mascotas.servicios.ServicioPublicacion.url;
 
 public class MascotaActivity extends AppCompatActivity {
     private static final String TAG = "MascotaActivity";
-    private static final int ACTIVITY_NUM = 3;
+    private static final int ACTIVITY_NUM = 2;
     private Context mcontext = MascotaActivity.this;
     private BottomNavigationView bottomNavigationView;
     private BottomNavigationViewHelper bottomNavigationViewHelper;

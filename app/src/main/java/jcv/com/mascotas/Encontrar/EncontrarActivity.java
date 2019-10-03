@@ -15,7 +15,7 @@ import jcv.com.mascotas.utils.BottomNavigationViewHelper;
 
 public class EncontrarActivity extends AppCompatActivity {
     private static final String TAG = "EncontrarActivity";
-    private static final int ACTIVITY_NUM = 2;
+    private static final int ACTIVITY_NUM = 1;
     private Context mcontext = EncontrarActivity.this;
     private BottomNavigationView bottomNavigationView;
     private BottomNavigationViewHelper bottomNavigationViewHelper;

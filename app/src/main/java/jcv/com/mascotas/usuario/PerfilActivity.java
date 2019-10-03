@@ -20,7 +20,7 @@ import jcv.com.mascotas.utils.BottomNavigationViewHelper;
 public class PerfilActivity extends AppCompatActivity {
 
     private static final String TAG = "PerfilActivity";
-    private static final int ACTIVITY_NUM = 4;
+    private static final int ACTIVITY_NUM = 3;
     private Context mcontext = PerfilActivity.this;
     private BottomNavigationView bottomNavigationView;
     private BottomNavigationViewHelper bottomNavigationViewHelper;
