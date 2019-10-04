@@ -826,25 +826,25 @@ public class PerfilEditarActivity extends AppCompatActivity {
         SubirFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
+                final CharSequence[] options = {"Tomar Foto", "Galeria", "Cancelar"};
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(PerfilEditarActivity.this);
-                builder.setTitle("Choose your profile picture");
+                builder.setTitle("Imagen");
 
                 builder.setItems(options, new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int item) {
 
-                        if (options[item].equals("Take Photo")) {
+                        if (options[item].equals("Tomar Foto")) {
                             Intent takePicture = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                             startActivityForResult(takePicture, 0);
 
-                        } else if (options[item].equals("Choose from Gallery")) {
+                        } else if (options[item].equals("Galeria")) {
                             Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                             startActivityForResult(pickPhoto, 1);
 
-                        } else if (options[item].equals("Cancel")) {
+                        } else if (options[item].equals("Cancelar")) {
                             dialog.dismiss();
                         }
                     }
